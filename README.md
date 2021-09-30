@@ -1,1 +1,1 @@
-# chatApp
+<h1 align="center"><b>chatApp</b></h1>
