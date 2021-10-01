@@ -5,6 +5,9 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
+// Load external styles and scripts from folder 'public'
+app.use(express.static('public'));
+
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
