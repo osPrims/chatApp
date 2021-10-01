@@ -74,16 +74,17 @@
           input.value = "";
         }
       });
-      socket.on("con",(msg) => {
-        let item = document.createElement('li');
+      socket.on("con", (msg) => {
+        let item = document.createElement("li");
+        item.style.color = "blue";
         item.textContent = msg;
         messages.appendChild(item);
-      })
+      });
       socket.on("chat message", (msg) => {
-        let item = document.createElement('li');
+        let item = document.createElement("li");
         item.textContent = msg;
         messages.appendChild(item);
-    });
+      });
     </script>
   </body>
 </html>

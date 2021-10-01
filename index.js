@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log("A user has connected");
-  socket.broadcast.emit("con", "some user connected");
+  socket.broadcast.emit("con", "A user has connected");
   socket.on("chat message", (msg) => {
     console.log("Message: ", msg);
     io.emit("chat message", msg);
@@ -19,7 +19,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("A user has disconnected");
-    io.emit("con", "some user disconnected");
+    io.emit("con", "A user has disconnected");
   });
 });
 
