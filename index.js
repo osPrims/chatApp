@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
-const { Server }  = require("socket.io");
+const { Server } = require("socket.io");
 const io = new Server(server);
 
 app.get("/", (req, res) => {
@@ -11,14 +11,15 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log("A user has connected");
-
+  socket.broadcast.emit("con", "A user has connected");
   socket.on("chat message", (msg) => {
     console.log("Message: ", msg);
     io.emit("chat message", msg);
-  })
+  });
 
   socket.on("disconnect", () => {
     console.log("A user has disconnected");
+    io.emit("con", "A user has disconnected");
   });
 });
 
