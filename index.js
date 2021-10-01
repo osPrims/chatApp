@@ -13,7 +13,7 @@ io.on("connection", (socket) => {
   console.log("A user has connected");
   socket.broadcast.emit("con", "A user has connected");
   socket.on("chat message", (msg) => {
-    console.log("Message: ", msg);
+    console.log("message: ", msg);
     io.emit("chat message", msg);
   });
 
