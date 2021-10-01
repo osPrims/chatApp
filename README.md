@@ -9,4 +9,4 @@ ChatApp is a project that I started to get familiar with Websockets and their im
 - Run `node index.js` or `nodemon index.js` (for automatically restarting your server on changes)
 - Open `localhost:3000` on multiple tabs and send a message from one tab to check if it is displayed across all tabs
 
-### For contributing, check out our CONTRIBUTING.md 
+### For contributing, [check out our CONTRIBUTING.md](CONTRIBUTING.md) 
