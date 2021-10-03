@@ -2,13 +2,15 @@
 <html>
   <head>
     <title>chatApp</title>
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/main.css" />
   </head>
   <body>
     <ul id="messages"></ul>
     <div id="feedback"></div>
     <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Enter</button>
+      <input id="username" placeholder="Username" />
+      <input id="input" autocomplete="off" placeholder="Type a message" />
+      <button>Enter</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/client.js"></script>
