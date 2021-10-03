@@ -48,3 +48,8 @@ body {
 #messages > li:nth-child(odd) {
   background: #efefef;
 }
+
+#feedback {
+  padding: 0.5rem 1rem;
+  color: rgb(126, 126, 255);
+}
