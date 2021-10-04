@@ -2,13 +2,17 @@ let socket = io();
 let form = document.getElementById("form");
 let input = document.getElementById("input");
 let feedback = document.getElementById("feedback");
+let username = document.getElementById("username");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   if (input.value) {
-    socket.emit("chat message", input.value);
+    socket.emit("chat message", username.value, input.value);
     input.value = "";
+  }
+  if (username.readOnly == false) {
+    username.readOnly = true;
   }
 });
 
@@ -20,9 +24,9 @@ socket.on("con", (msg) => {
   messages.appendChild(item);
 });
 
-socket.on("chat message", (msg) => {
+socket.on("chat message", (user, msg) => {
   let item = document.createElement("li");
-  item.textContent = msg;
+  item.innerHTML = `<b>${ user }: </b>` + msg;
   messages.appendChild(item);
   feedback.innerHTML = "";
 });
