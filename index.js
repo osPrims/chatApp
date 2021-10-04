@@ -19,9 +19,9 @@ io.on("connection", (socket) => {
 
   socket.broadcast.emit("con", "A user has connected");
 
-  socket.on("chat message", (msg) => {
-    console.log("message: ", msg);
-    io.emit("chat message", msg);
+  socket.on("chat message", (user, msg) => {
+    console.log(user + "(user): ", msg);
+    io.emit("chat message", user, msg);
   });
 
   socket.on("typing", () => {

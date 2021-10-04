@@ -17,6 +17,9 @@ body {
   box-sizing: border-box;
   backdrop-filter: blur(10px);
 }
+#username {
+  outline: none;
+}
 #input {
   border: none;
   padding: 0 1rem;
