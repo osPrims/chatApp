@@ -11,12 +11,15 @@ form.addEventListener("submit", (e) => {
     input.value = "";
   }
 });
+
+// Show 'A user has connected'
 socket.on("con", (msg) => {
   let item = document.createElement("li");
   item.style.color = "blue";
   item.textContent = msg;
   messages.appendChild(item);
 });
+
 socket.on("chat message", (msg) => {
   let item = document.createElement("li");
   item.textContent = msg;
@@ -24,8 +27,8 @@ socket.on("chat message", (msg) => {
   feedback.innerHTML = "";
 });
 
-input.addEventListener('keypress', () => {
-  socket.emit('typing');
+input.addEventListener("keypress", () => {
+  socket.emit("typing");
 });
 
 socket.on("typing", () => {
