@@ -4,12 +4,29 @@ let input = document.getElementById("input");
 let feedback = document.getElementById("feedback");
 let username = document.getElementById("username");
 let users = [];
+
+
+let coll = document.getElementsByClassName("collapsible");
+
+coll[0].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+          content.style.display = "none";
+    } else {
+          content.style.display = "block";
+    }
+})
+
+
+// ask users online as soon as you connect
 fetch("/users")
 .then((user) => user.json())
 .then((data) => {
   users = data;
   users.forEach((user) => addusertolist(user));
 });
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -23,23 +40,6 @@ form.addEventListener("submit", (e) => {
   console.log(users);
 });
 
-// Show 'A user has connected'
-// socket.on("con", (msg) => {
-//   let item = document.createElement("li");
-//   item.style.color = "blue";
-//   item.textContent = msg;
-//   messages.appendChild(item);
-
-//   let result = await fetch("/users");
-//   users = await result.json();
-  //update online members
-  // setTimeout(async() => {
-  //   let item = document.createElement("li");
-  //   item.style.color = "blue";
-  //   item.textContent = users[0].name;
-  //   online.appendChild(item);
-  //   }, 1000);
-// });
 socket.on("connected", (id) => {
   users.push({ name:"", id: id});
   let item = document.createElement("li");
@@ -48,11 +48,6 @@ socket.on("connected", (id) => {
   messages.appendChild(item);
 
   addusertolist({ name: "anonimus", id: id});
-  // let user = document.createElement("li");
-  // user.style.color = "blue";
-  // user.textContent = "anonimus";
-  // user.id = id;
-  // online.appendChild(user);
 });
 
 socket.on("disconnected", (id) => {
@@ -71,6 +66,7 @@ socket.on("chat message", (user, msg) => {
   messages.appendChild(item);
   feedback.innerHTML = "";
 
+  // check if someone has set their name
   users.forEach((saved_user) => {
     if(saved_user.id == user.id) {
       saved_user.name = user.name

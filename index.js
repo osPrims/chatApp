@@ -7,14 +7,16 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const port = process.env.PORT || 8080
 let users = []; 
+
 // Load external styles and scripts from folder 'public'
 app.use(express.static("public"));
 
-// Um
+// Serve the main file
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
+// Serve list of users 
 app.get("/users", (req, res) => {
   res.send(users);
 });
@@ -22,12 +24,11 @@ app.get("/users", (req, res) => {
 io.on("connection", (socket) => {
   console.log("A user has connected");
   socket.broadcast.emit("connected", socket.id);
-  //let = current_user = { name: "", id: socket.id };
   socket.name ="";
   let filtered_users = users.filter((user) => user.id == socket.id);
   if(filtered_users != []) {
     users.push({
-      name: "",
+      name: "Annonimus",
       id : socket.id
     });
   }
