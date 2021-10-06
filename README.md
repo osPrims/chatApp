@@ -2,6 +2,8 @@
 
 ChatApp is a project that I started to get familiar with Websockets and their implementation with Socket.IO.
 
+Project link - https://chatapp-420.herokuapp.com
+
 ---
 ## Setup Instructions for Development
 - Clone the repository
