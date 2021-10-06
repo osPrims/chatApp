@@ -6,23 +6,37 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 const port = process.env.PORT || 8080
+let users = []; 
 
 // Load external styles and scripts from folder 'public'
 app.use(express.static("public"));
 
-// Um
+// Serve the main file
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
+// Serve list of users 
+app.get("/users", (req, res) => {
+  res.send(users);
+});
+
 io.on("connection", (socket) => {
   console.log("A user has connected");
-
-  socket.broadcast.emit("con", "A user has connected");
-
-  socket.on("chat message", (user, msg) => {
-    console.log(user + "(user): ", msg);
-    io.emit("chat message", user, msg);
+  socket.broadcast.emit("connected", socket.id);
+  socket.name ="";
+  let filtered_users = users.filter((user) => user.id == socket.id);
+  if(filtered_users != []) {
+    users.push({
+      name: "Annonimus",
+      id : socket.id
+    });
+  }
+  socket.on("chat message", (user_name, msg) => {
+    console.log(user_name + "(user): ", msg);
+    socket.name = user_name;
+    io.emit("chat message", {name:socket.name, id:socket.id} , msg);
+    let current_user = users.filter((user) =>{ if(user.id == socket.id) {user.name = user_name} });
   });
 
   socket.on("typing", () => {
@@ -31,7 +45,8 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("A user has disconnected");
-    io.emit("con", "A user has disconnected");
+    users = users.filter((user) => user.id != socket.id);
+    io.emit("disconnected", socket.id);
   });
 });
 
