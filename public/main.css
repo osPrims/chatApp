@@ -46,6 +46,7 @@ body {
   height: 40px;
   margin: auto 10px;
   width: 200px;
+  border-radius: 15px;
 }
 #input {
   border: none;
