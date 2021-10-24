@@ -64,6 +64,7 @@ socket.on("chat message", (user, msg) => {
   let item = document.createElement("li");
   item.innerHTML = `<b>${ user.name }: </b>` + msg;
   messages.appendChild(item);
+  window.scrollTo(0, document.body.scrollHeight);
   feedback.innerHTML = "";
 
   // check if someone has set their name
