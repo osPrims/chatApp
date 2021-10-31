@@ -116,7 +116,7 @@ body {
 
 .active,
 .collapsible:hover {
-  background-color: #555;
+  background-color: rgb(107, 106, 106);
 }
 
 .content {
