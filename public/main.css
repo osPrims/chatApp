@@ -6,12 +6,12 @@ body {
   background: #093028; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #237a57,
+    #af335d,
     #093028
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
-    #237a57,
+    #9c19b6,
     #093028
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
