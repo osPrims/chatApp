@@ -33,3 +33,4 @@ It is recommended that you install and use [Git Bash](https://git-scm.com/downlo
 6. In your browser, open the URL `localhost:8080` from the address bar to see the chatApp in its glory. <br/>
    ![image](https://user-images.githubusercontent.com/70942982/143769693-7ec927e2-31ac-493d-86e9-1dd3209e83f7.png)
 
+Open the folder in your choice of editor to edit and make changes to the project.
