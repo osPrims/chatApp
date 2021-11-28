@@ -15,9 +15,9 @@ It is recommended that you install and use [Git Bash](https://git-scm.com/downlo
    ![image](https://user-images.githubusercontent.com/70942982/143769515-719cdb62-3b85-4d55-8577-ca6a5cdbc4bb.png)
 
 2. Copy and **clone *your fork's*** URL using the `git clone [URL]` command. <br/>
-   Copy - 
+   Copy - <br/>
    ![image](https://user-images.githubusercontent.com/70942982/143769547-9c69be81-e449-4c95-b3ac-2adea2ea7ea1.png) <br/>
-   Clone - 
+   Clone - <br/>
    ![image](https://user-images.githubusercontent.com/70942982/143769592-3bdf78ab-aa1a-4f78-91e7-8e0e728d85c9.png)
 
 3. Change your directory to reach **chatApp** folder using `cd chatApp`
