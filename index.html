@@ -24,10 +24,12 @@
     ></script>
   </head>
   <body>
-    <button type="button" class="collapsible">Online</button>
-    <div class="content">
-      <ul id="online"></ul>
-    </div>
+    <nav class="d-flex flex-column align-items-end position-fixed w-100">
+      <button type="button" class="collapsible btn btn-secondary m-2 w-auto">Online</button>
+      <div class="content dropdown-menu">
+        <ul id="online" class="m-1"></ul>
+      </div>  
+    </nav>
     <ul id="messages"></ul>
     <div id="feedback"></div>
     <form id="form" action="">

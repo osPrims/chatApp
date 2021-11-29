@@ -125,6 +125,9 @@ body {
   overflow: hidden;
   background-color: #f1f1f1;
 }
+div.content {
+  margin: 3.3rem 0.5rem 0 0;
+}
 
 ::-webkit-input-placeholder {
   text-align: center;
