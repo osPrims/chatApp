@@ -39,8 +39,8 @@ io.on("connection", (socket) => {
     let current_user = users.filter((user) =>{ if(user.id == socket.id) {user.name = user_name} });
   });
 
-  socket.on("typing", () => {
-    socket.broadcast.emit("typing");
+  socket.on("typing", (user) => {
+    socket.broadcast.emit("typing",user);
   });
 
   socket.on("disconnect", () => {
