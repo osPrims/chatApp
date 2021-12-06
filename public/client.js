@@ -3,6 +3,7 @@ let form = document.getElementById("form");
 let input = document.getElementById("input");
 let feedback = document.getElementById("feedback");
 let username = document.getElementById("username");
+let messages = document.getElementById("messages");
 let users = [];
 
 
@@ -76,6 +77,19 @@ socket.on("chat message", (user, msg) => {
     }
   });
 });
+socket.on("output",(result)=>{
+  
+  if(result.length)
+  {
+    for(var x=0;x<result.length;x++)
+    {
+      let item = document.createElement("li");
+      item.innerHTML = `<b>${ result[x].name }: </b>` + result[x].message ;
+      
+      messages.appendChild(item);
+    }
+  }
+})
 
 input.addEventListener("keypress", () => {
   socket.emit("typing");
