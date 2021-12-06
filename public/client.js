@@ -92,11 +92,11 @@ socket.on("output",(result)=>{
 })
 
 input.addEventListener("keypress", () => {
-  socket.emit("typing");
+  socket.emit("typing",username.value);
 });
 
-socket.on("typing", () => {
-  feedback.innerHTML = "A user is typing...";
+socket.on("typing", (user) => {
+  feedback.innerHTML = user + " is typing...";
 });
 
 let addusertolist = (user) => {
