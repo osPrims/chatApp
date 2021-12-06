@@ -1,15 +1,19 @@
 // Usual Express and Socket.IO stuff
 const express = require("express");
+let favicon = require('serve-favicon');
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 const port = process.env.PORT || 8080
-let users = []; 
+let users = [];
 
 // Load external styles and scripts from folder 'public'
 app.use(express.static("public"));
+
+//to serve favicon
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
 
 // Serve the main file
 app.get("/", (req, res) => {
@@ -24,23 +28,23 @@ app.get("/users", (req, res) => {
 io.on("connection", (socket) => {
   console.log("A user has connected");
   socket.broadcast.emit("connected", socket.id);
-  socket.name ="";
+  socket.name = "";
   let filtered_users = users.filter((user) => user.id == socket.id);
-  if(filtered_users != []) {
+  if (filtered_users != []) {
     users.push({
       name: "Annonimus",
-      id : socket.id
+      id: socket.id
     });
   }
   socket.on("chat message", (user_name, msg) => {
     console.log(user_name + "(user): ", msg);
     socket.name = user_name;
-    io.emit("chat message", {name:socket.name, id:socket.id} , msg);
-    let current_user = users.filter((user) =>{ if(user.id == socket.id) {user.name = user_name} });
+    io.emit("chat message", { name: socket.name, id: socket.id }, msg);
+    let current_user = users.filter((user) => { if (user.id == socket.id) { user.name = user_name } });
   });
 
   socket.on("typing", (user) => {
-    socket.broadcast.emit("typing",user);
+    socket.broadcast.emit("typing", user);
   });
 
   socket.on("disconnect", () => {
