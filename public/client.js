@@ -81,8 +81,13 @@ input.addEventListener("keypress", () => {
   socket.emit("typing",username.value);
 });
 
+let fbTimer;
 socket.on("typing", (user) => {
+  clearTimeout(fbTimer);
   feedback.innerHTML = user + " is typing...";
+  fbTimer = setTimeout(() => {
+    feedback.innerHTML="";
+  },2000);
 });
 
 let addusertolist = (user) => {
