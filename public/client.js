@@ -127,6 +127,19 @@ socket.on("chat message", (user, msg) => {
       item.innerHTML = '<span class="dot"></span>' + user.name;
     }
   });
+});
+socket.on("output",(result)=>{
+  
+  if(result.length)
+  {
+    for(var x=0;x<result.length;x++)
+    {
+      let item = document.createElement("li");
+      item.innerHTML = `<b>${ result[x].name }: </b>` + result[x].message ;
+      
+      messages.appendChild(item);
+    }
+  }
 })
 
 // Sent to server when you type
