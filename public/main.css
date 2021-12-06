@@ -1,19 +1,41 @@
 body {
   margin: 0;
   padding-bottom: 3rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif;
-  background: #093028; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #af335d,
-    #093028
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #9c19b6,
-    #093028
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,Arial, sans-serif;
+  background-color: cyan;
+}
+
+#header img {
+  height : 110px;
+  left : 31%;
+  position: absolute;
+}
+
+#header h2{
+  color: #ed1c24;
+  font-size: 83px;
+  font-family: Copperplate;
+  position: absolute;
+  left: 39%;
+  top: 5px;
+}
+
+#main {
+  width: 90%;
+  position: absolute;
+  top: 12%;
+  left: 5%;
+  height: 75%;
+  border-radius: 20px;
+  background-color: #1a4d5e;
+  padding: 10px;
+  overflow: auto;
+  border: 10px solid #ed1c24;
+}
+
+#main nav {
+  right: 5%;
+  top: 22px;
 }
 
 #form {
@@ -27,17 +49,7 @@ body {
   display: flex;
   box-sizing: border-box;
   backdrop-filter: blur(10px);
-  background: #000000; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: #1a4d5e;
 }
 #username {
   outline: none;
@@ -77,33 +89,46 @@ body {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  color: #fff;
 }
+
 #messages > li {
   padding: 0.5rem 1rem;
+  padding-bottom: 0.7rem;
+  border-radius: 20px;
+  margin-bottom: 0.8rem;
+  clear: both;
+  border: 0.1px solid rgb(213 213 213);
+  font-weight: 500;
 }
-#messages > li:nth-child(odd) {
-  color: #000;
-  background: #30e8bf; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #ff8235,
-    #30e8bf
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #ff8235,
-    #30e8bf
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+.connection {
+  text-align: center;
+  width: 50%;
+  left: 25%;
+  position: relative;
+}
+
+.messages {
+  width: 50%;
+  float: left;
+  background-color: white;
+}
+
+.self {
+  color: rgb(0, 0, 255);
+  background-color: gold;
+  float: right;
 }
 
 #feedback {
   padding: 0.5rem 1rem;
-  color: rgb(140, 140, 255);
+  color: rgb(255 255 255);
+  text-align: center;
+  clear: both;
 }
 
 .collapsible {
-  background-color: #777;
+  background-color:#1a4d5e;
   color: white;
   cursor: pointer;
   padding: 18px;
@@ -116,7 +141,7 @@ body {
 
 .active,
 .collapsible:hover {
-  background-color: rgb(107, 106, 106);
+  background-color: #05465c ;
 }
 
 .content {
@@ -125,6 +150,9 @@ body {
   overflow: hidden;
   background-color: #f1f1f1;
 }
+div.content {
+  margin: 4.2rem 0.5rem 0 0;
+}
 
 ::-webkit-input-placeholder {
   text-align: center;
@@ -132,3 +160,5 @@ body {
 input{
   text-align: center;
 }
+
+

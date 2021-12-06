@@ -25,31 +25,40 @@ app.get("/users", (req, res) => {
   res.send(users);
 });
 
+// When a connection is received
 io.on("connection", (socket) => {
   console.log("A user has connected");
-  socket.broadcast.emit("connected", socket.id);
-  socket.name = "";
-  let filtered_users = users.filter((user) => user.id == socket.id);
-  if (filtered_users != []) {
+
+  // Emiting to all clients a user has connected
+  io.emit("connected", socket.id)
+
+  socket.name =""
+  let filtered_user = users.filter((user) => user.id === socket.id)
+  if(!filtered_user.length) {
     users.push({
-      name: "Annonimus",
-      id: socket.id
-    });
+      name: "Anonymous",
+      id : socket.id });
   }
+
+  // Receiving a chat message from client
   socket.on("chat message", (user_name, msg) => {
+    console.log('Received a chat message')
     console.log(user_name + "(user): ", msg);
     socket.name = user_name;
-    io.emit("chat message", { name: socket.name, id: socket.id }, msg);
-    let current_user = users.filter((user) => { if (user.id == socket.id) { user.name = user_name } });
+    io.emit("chat message", {name:socket.name, id:socket.id} , msg);
+    let current_user = users.filter((user) => user.id === socket.id);
+    current_user[0].name = user_name
   });
 
+  // Received when some client is typing
   socket.on("typing", (user) => {
-    socket.broadcast.emit("typing", user);
+    socket.broadcast.emit("typing",user);
   });
 
+  // Sent to all clients when a socket is disconnected
   socket.on("disconnect", () => {
     console.log("A user has disconnected");
-    users = users.filter((user) => user.id != socket.id);
+    users = users.filter((user) => user.id !== socket.id);
     io.emit("disconnected", socket.id);
   });
 });
