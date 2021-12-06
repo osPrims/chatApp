@@ -6,36 +6,38 @@ body {
 }
 
 #header img {
-  height : 110px;
-  left : 31%;
+  height : 100px;
+  left : 32%;
   position: absolute;
 }
 
 #header h2{
   color: #ed1c24;
-  font-size: 83px;
+  font-size: 79px;
   font-family: Copperplate;
   position: absolute;
-  left: 39%;
-  top: 5px;
+  left: 40%;
+  top: 4px;
 }
 
 #main {
-  width: 90%;
+  width: 95%;
   position: absolute;
-  top: 12%;
-  left: 5%;
-  height: 75%;
+  top: 11%;
+  left: 2.5%;
+  height: 80%;
   border-radius: 20px;
   background-color: #1a4d5e;
   padding: 10px;
   overflow: auto;
-  border: 10px solid #ed1c24;
+  border: 8px solid #ed1c24;
+  z-index: -1;
 }
 
-#main nav {
-  right: 5%;
-  top: 22px;
+#header nav {
+  right: -85%;
+  top: 24px;
+  position: relative;
 }
 
 #form {
@@ -58,15 +60,14 @@ body {
   height: 40px;
   margin: auto 10px;
   width: 200px;
-  border-radius: 15px;
+  border-radius: 20px;
 }
 #input {
   border: none;
   padding: 0 1rem;
   flex-grow: 1;
-  border-radius: 2rem;
+  border-radius: 20px;
   margin: auto 10px;
-  /* margin: 650px 20px 20px; */
   height: 40px;
   width: 900px;
 }
@@ -128,15 +129,17 @@ body {
 }
 
 .collapsible {
-  background-color:#1a4d5e;
+  background-color: #1a4d5e;
   color: white;
   cursor: pointer;
   padding: 18px;
-  width: 100%;
+  width: 12%;
   border: none;
   text-align: left;
   outline: none;
   font-size: 15px;
+  text-align: center;
+  border-radius: 20px;
 }
 
 .active,
@@ -149,9 +152,12 @@ body {
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
+  width: 12%;
+  border-radius: 10px;
 }
 div.content {
-  margin: 4.2rem 0.5rem 0 0;
+  margin-top: 0.3rem;
+  padding: 0;
 }
 
 ::-webkit-input-placeholder {
@@ -161,4 +167,26 @@ input{
   text-align: center;
 }
 
+#online {
+  margin: 0;
+  padding: 0;
+}
 
+#online li {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+#online li:hover {
+  background-color: #bdbdbd;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 11px;
+}

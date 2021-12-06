@@ -52,8 +52,8 @@ form.addEventListener("submit", (e) => {
 // Received from server when someone gets connected
 socket.on("connected", (id) => {
 
-  users.push({ name:"Annonymus", id: id, color : colors[0] })
-  addusertolist({ name: "Annonymus", id: id, color : colors[0]})
+  users.push({ name:"Anonymous", id: id, color : colors[0] })
+  addusertolist({ name: "Anonymous", id: id, color : colors[0]})
   colors = colors.splice(1)
 
   if(selfId){
@@ -111,7 +111,6 @@ socket.on("chat message", (user, msg) => {
     half = 'PM'
   }
   let currentMinute = currentTime.getMinutes()
-  console.log(currentMinute)
   if(currentMinute < 10){
     currentMinute = `0${currentMinute}`
   }
@@ -129,7 +128,7 @@ socket.on("chat message", (user, msg) => {
     if(saved_user.id === user.id) {
       saved_user.name = user.name
       let item = document.getElementById(user.id);
-      item.textContent = user.name;
+      item.innerHTML = '<span class="dot"></span>' + user.name;
     }
   });
 })
@@ -140,16 +139,22 @@ input.addEventListener("keypress", () => {
 });
 
 //Received from server when someone else is typing
+let fbTimer;
 socket.on("typing", (user) => {
+  clearTimeout(fbTimer);
   feedback.innerHTML = user + " is typing...";
+  fbTimer = setTimeout(() => {
+    feedback.innerHTML="";
+  },2000);
 });
 
 // Add user to collapsible
 let addusertolist = (user) => {
   let item = document.createElement("li");
   item.style.color = (selfId) ? user.color : 'blue';
-  item.textContent = user.name;
+  item.innerHTML = '<span class="dot"></span>' + user.name;
   item.id = user.id
+  item.onclick = handleOnlineClick.bind(null,user.id)
   online.appendChild(item);
 }
 
@@ -173,4 +178,9 @@ function scrollSmoothToBottom(id){
 function playSound(url) {
   const audio = new Audio(url);
   audio.play();
+}
+
+function handleOnlineClick(id){
+  let current_user = users.filter((user)=> user.id === id)
+  input.value = `@${current_user[0].name}`
 }
