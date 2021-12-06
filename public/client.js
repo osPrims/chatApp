@@ -4,6 +4,7 @@ let input = document.getElementById("input");
 let feedback = document.getElementById("feedback");
 let username = document.getElementById("username");
 let users = [];
+let my_socket_id = ''
 
 
 let coll = document.getElementsByClassName("collapsible");
@@ -36,12 +37,19 @@ form.addEventListener("submit", (e) => {
   }
   if (username.readOnly == false) {
     username.readOnly = true;
+    
+    const my_data = {
+      name : `${username.value} (you)`,
+      id : my_socket_id
+    }
+    addusertolist(my_data)
   }
   console.log(users);
 });
 
 socket.on("connected", (id) => {
   users.push({ name:"", id: id});
+  my_socket_id = id
   let item = document.createElement("li");
   item.style.color = "blue";
   item.textContent = "A user has connected";
