@@ -175,8 +175,10 @@ function handleOnlineClick(id) {
 }
 
 sendBtn.addEventListener('mousedown', () => {
-  sendBtn.innerHTML = 'Sent &nbsp;<i class="fas fa-chevron-circle-right"></i>'
-  sendBtn.style.backgroundColor = '#38b000'
+  if (input.value) {
+    sendBtn.innerHTML = 'Sent &nbsp;<i class="fas fa-chevron-circle-right"></i>'
+    sendBtn.style.backgroundColor = '#38b000'
+  }
 });
 
 sendBtn.addEventListener('mouseup', () => {
