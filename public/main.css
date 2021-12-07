@@ -21,7 +21,7 @@ body {
 }
 
 #header nav {
-  right: 8%;
+  right: 3rem;
   top: 24px;
   position: absolute;
 }
@@ -61,7 +61,7 @@ body {
   color: white;
   cursor: pointer;
   padding: 18px;
-  width: 200%;
+  width: 10rem;
   border: none;
   text-align: left;
   outline: none;
@@ -80,10 +80,8 @@ body {
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
-  width: 12%;
+  width: 10rem;
   border-radius: 10px;
-}
-div.content {
   margin-top: 0.3rem;
   padding: 0;
 }
