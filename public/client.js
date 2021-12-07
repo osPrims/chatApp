@@ -6,8 +6,17 @@ let username = document.getElementById("username");
 let messages = document.getElementById('messages');
 let online = document.getElementById('online');
 let sendBtn = document.querySelector('.btn--send');
+
 let users = [];
 let selfId;
+let md;
+
+md = window.markdownit({
+  html: false,
+  linkify: true,
+  typographer: true
+});
+
 
 // Color for the messages 
 let colors = ['#0080FF', '#8000FF', '#FF00FF', '#FF0080', '#FF0000', '#FF8000', '#80FF00', '#00FF00', '#00FF80'];
@@ -118,6 +127,7 @@ socket.on("chat message", (user, msg) => {
   item.classList.add('messages');
   messages.appendChild(item);
 
+
   scrollSmoothToBottom('main');
   if (user.id !== selfId) playSound('/notification.mp3');
   feedback.innerHTML = "";
@@ -197,4 +207,14 @@ sendBtn.addEventListener('mouseup', () => {
     sendBtn.innerHTML = 'Send <i class="fas fa-chevron-circle-right"></i>';
     sendBtn.style.backgroundColor = '#ed1c24';
   }, 400);
+});
+
+input.addEventListener("keyup", function (event) {
+  if (event.key === 'Enter') {
+    sendBtn.click();
+    sendBtn.style.backgroundColor = '#38b000'
+    setTimeout(() => {
+      sendBtn.style.backgroundColor = '#ed1c24'
+    }, 400);
+  }
 });
