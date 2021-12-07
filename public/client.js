@@ -180,6 +180,8 @@ sendBtn.addEventListener('mousedown', () => {
 });
 
 sendBtn.addEventListener('mouseup', () => {
-  sendBtn.innerHTML = 'Send <i class="fas fa-chevron-circle-right"></i>'
-  sendBtn.style.backgroundColor = '#ed1c24'
+  setTimeout(() => {
+    sendBtn.innerHTML = 'Send <i class="fas fa-chevron-circle-right"></i>'
+    sendBtn.style.backgroundColor = '#ed1c24'
+  }, 400);
 });
