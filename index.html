@@ -22,6 +22,15 @@
       integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/emoji-button@0.6.0/dist/index.min.js"></script>
+      
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+  EmojiButton(document.querySelector('#emoji-button'), function (emoji) {
+    document.querySelector ('#input').value += emoji;
+  });
+});
+</script>
   </head>
   <body>
     <button type="button" class="collapsible">Online</button>
@@ -33,6 +42,10 @@
     <form id="form" action="">
       <input id="username" placeholder="Username" />
       <input id="input" autocomplete="off" placeholder="Type a message" />
+      <div class="container">
+        <button id="emoji-button"
+         type="button">😀</button>
+        </div>
       <div class="col-auto">
         <button
           type="submit"
