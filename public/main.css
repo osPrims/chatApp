@@ -50,6 +50,12 @@ body {
   margin-right: 11px;
 }
 
+.search-messages{
+  display: inline-block;
+  margin-left: 100px;
+  margin-top: 20px;
+}
+
 .collapsible {
   background-color: #1a4d5e;
   color: white;
@@ -208,5 +214,3 @@ input{
 ::-webkit-input-placeholder {
   text-align: center;
 }
-
-

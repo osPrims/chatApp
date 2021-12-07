@@ -5,6 +5,8 @@ let feedback = document.getElementById("feedback");
 let username = document.getElementById("username");
 let messages = document.getElementById('messages')
 let online = document.getElementById('online');
+let list = document.querySelector('#messages');
+let forms = document.forms;
 let users = []
 let selfId
 
@@ -103,7 +105,7 @@ socket.on("chat message", (user, msg) => {
     item.style.color = current_user[0].color
   }
 
-  item.innerHTML = `<b>${ user.name }&nbsp;</b><br>` + msg;
+  item.innerHTML = `<b>${ user.name }: </b>` + `<div class="userMsg">${msg}</div>`;
   item.classList.add('messages')
   messages.appendChild(item)
 
@@ -172,3 +174,18 @@ function handleOnlineClick(id){
   let current_user = users.filter((user)=> user.id === id)
   input.value = `@${current_user[0].name}`
 }
+
+// search box JS
+const searchBar = forms['search-messages'].querySelector('input');
+searchBar.addEventListener('keyup', (e) => {
+  const term = e.target.value.toLowerCase();
+  const messageList = list.getElementsByClassName('userMsg');
+  Array.from(messageList).forEach((msgList) => {
+    const title = msgList.textContent;
+    if(title.toLowerCase().indexOf(e.target.value) !== -1){
+      msgList.parentNode.style.display = 'block';
+    } else {
+      msgList.parentNode.style.display = 'none';
+    }
+  });
+});
