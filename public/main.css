@@ -21,9 +21,9 @@ body {
 }
 
 #header nav {
-  right: -85%;
+  right: 8%;
   top: 24px;
-  position: relative;
+  position: absolute;
 }
 
 #online {
@@ -61,7 +61,7 @@ body {
   color: white;
   cursor: pointer;
   padding: 18px;
-  width: 12%;
+  width: 200%;
   border: none;
   text-align: left;
   outline: none;
