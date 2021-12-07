@@ -132,6 +132,7 @@ let fbTimer;
 socket.on("typing", (user) => {
   clearTimeout(fbTimer);
   feedback.innerHTML = user + " is typing...";
+  scrollSmoothToBottom('main');
   fbTimer = setTimeout(() => {
     feedback.innerHTML = "";
   }, 2000);
