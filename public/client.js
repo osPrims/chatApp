@@ -103,19 +103,7 @@ socket.on("chat message", (user, msg) => {
     item.style.color = current_user[0].color
   }
 
-  let currentTime = new Date()
-  let currentHour = currentTime.getHours()
-  let half = 'AM'
-  if(currentHour > 12){
-    currentHour = currentTime.getHours() - 12
-    half = 'PM'
-  }
-  let currentMinute = currentTime.getMinutes()
-  if(currentMinute < 10){
-    currentMinute = `0${currentMinute}`
-  }
-
-  item.innerHTML = `<b> ${ user.name } &nbsp; </b> ( ${currentHour} : ${currentMinute}  ${half} ) <br>` + msg;
+  item.innerHTML = `<b>${ user.name }&nbsp;</b><br>` + msg;
   item.classList.add('messages')
   messages.appendChild(item)
 

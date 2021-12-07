@@ -170,6 +170,7 @@ div.content {
 }
 #username {
   outline: none;
+  border: none;
   padding: auto auto;
   /* margin: 650px 20px 20px;  */
   height: 40px;
