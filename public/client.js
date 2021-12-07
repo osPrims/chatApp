@@ -8,6 +8,13 @@ let online = document.getElementById('online');
 let sendBtn = document.querySelector('.btn--send');
 let users = []
 let selfId
+let md
+
+md = window.markdownit({
+  html: false,
+  linkify: true,
+  typographer: true
+});
 
 // Color for the messages 
 let colors = ['#0080FF', '#8000FF', '#FF00FF', '#FF0080', '#FF0000', '#FF8000', '#80FF00', '#00FF00', '#00FF80']
@@ -104,7 +111,7 @@ socket.on("chat message", (user, msg) => {
     item.style.color = current_user[0].color
   }
 
-  item.innerHTML = `<b>${user.name}&nbsp;</b><br>` + msg;
+  item.innerHTML = `<b>${user.name}&nbsp;</b><br>` + md.render(msg);
   item.classList.add('messages')
   messages.appendChild(item)
 
