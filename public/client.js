@@ -188,3 +188,16 @@ sendBtn.addEventListener('mouseup', () => {
     sendBtn.style.backgroundColor = '#ed1c24'
   }, 400);
 });
+
+input.addEventListener("keyup", function (event) {
+  if (event.key === 'Enter') {
+    sendBtn.click();
+    sendBtn.style.backgroundColor = '#38b000'
+  }
+});
+
+input.addEventListener("keyup", function (event) {
+  setTimeout(() => {
+    sendBtn.style.backgroundColor = '#ed1c24'
+  }, 400);
+});
