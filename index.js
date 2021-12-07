@@ -6,7 +6,7 @@ const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080;
 let users = [];
 
 // Load external styles and scripts from folder 'public'
@@ -29,30 +29,37 @@ app.get("/users", (req, res) => {
 io.on("connection", (socket) => {
   console.log("A user has connected");
 
-  // Emiting to all clients a user has connected
-  io.emit("connected", socket.id)
+  // Emitting to all clients a user has connected
+  io.emit("connected", socket.id);
 
-  socket.name =""
-  let filtered_user = users.filter((user) => user.id === socket.id)
-  if(!filtered_user.length) {
+  socket.name = "";
+  let filtered_user = users.filter((user) => user.id === socket.id);
+  if (!filtered_user.length) {
     users.push({
       name: "Anonymous",
-      id : socket.id });
+      id: socket.id
+    });
   }
 
   // Receiving a chat message from client
-  socket.on("chat message", (user_name, msg) => {
-    console.log('Received a chat message')
+  socket.on("chat message", (user_name, msg, type) => {
+    console.log('Received a chat message');
     console.log(user_name + "(user): ", msg);
     socket.name = user_name;
-    io.emit("chat message", {name:socket.name, id:socket.id} , msg);
+    if (type == "all") io.emit("chat message", { name: socket.name, id: socket.id }, msg);
+    else {
+      const userList = users.filter(user => user.name == type);
+      if (userList.length) userList.forEach(user => io.to(socket.id).to(user.id).emit("chat message", { name: socket.name, id: socket.id }, msg));
+      else io.emit("chat message", { name: socket.name, id: socket.id }, msg);
+    }
+
     let current_user = users.filter((user) => user.id === socket.id);
-    current_user[0].name = user_name
+    current_user[0].name = user_name;
   });
 
   // Received when some client is typing
   socket.on("typing", (user) => {
-    socket.broadcast.emit("typing",user);
+    socket.broadcast.emit("typing", user);
   });
 
   // Sent to all clients when a socket is disconnected
