@@ -100,7 +100,7 @@ socket.on("disconnected", (id) => {
 });
 
 // Recieved from a server when a chat message is received
-socket.on("chat message", (user, msg) => {
+socket.on("chat message", (user, msg, time) => {
   let item = document.createElement("li");
   item.className = user.id
   let current_user = users.filter((_user_) => _user_.id === user.id)
@@ -111,7 +111,7 @@ socket.on("chat message", (user, msg) => {
     item.style.color = current_user[0].color
   }
 
-  item.innerHTML = `<b>${user.name}&nbsp;</b><br>` + md.render(msg);
+  item.innerHTML = `<b>${user.name}&nbsp;</b><span class="time" >${time}</span><br>` + md.render(msg);
   item.classList.add('messages')
   messages.appendChild(item)
 

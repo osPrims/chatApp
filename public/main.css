@@ -220,3 +220,8 @@ input {
   color: #fff;
   font-size: 1.2rem;
 }
+
+.time {
+  font-size: 0.8rem;
+  color: #414141;
+}
