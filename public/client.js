@@ -101,8 +101,6 @@ socket.on("disconnected", (id) => {
 
 // Recieved from a server when a chat message is received
 socket.on("chat message", (user, msg) => {
-  console.log(user.name, user.id, msg);
-  console.log(selfId);
   let item = document.createElement("li");
   item.className = user.id;
   let current_user = users.filter((_user_) => _user_.id === user.id)

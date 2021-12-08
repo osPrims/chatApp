@@ -39,7 +39,7 @@ app.get("/users", (req, res) => {
 // When a connection is received
 io.on("connection", (socket) => {
   console.log("A user has connected");
-  socket.broadcast.emit("connected", socket.id);
+  io.emit("connected", socket.id);
  getmessages(socket);
  
   socket.name ="";
