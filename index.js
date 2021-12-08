@@ -56,6 +56,7 @@ io.on("connection", (socket) => {
     console.log(user_name + "(user): ", msg);
     storemessage(user_name, msg);
     socket.name = user_name;
+    console.log(socket.name);
     io.emit("chat message", {name:socket.name, id:socket.id} , msg);
     let current_user = users.filter((user) => user.id === socket.id);
     current_user[0].name = user_name
