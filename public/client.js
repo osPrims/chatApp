@@ -6,9 +6,9 @@ let username = document.getElementById("username");
 let messages = document.getElementById('messages')
 let online = document.getElementById('online');
 let sendBtn = document.querySelector('.btn--send');
-let users = []
-let selfId
-let md
+let users = [];
+let selfId;
+let md;
 
 md = window.markdownit({
   html: false,
@@ -135,8 +135,8 @@ socket.on("output",(result)=>{
     for(var x=0;x<result.length;x++)
     {
       let item = document.createElement("li");
-      item.innerHTML = `<b>${ result[x].name }: </b>` + result[x].message ;
-      
+      item.innerHTML = `<b>${result[x].name}&nbsp;</b><br>` + md.render(result[x].message);
+      item.classList.add('messages')
       messages.appendChild(item);
     }
   }
