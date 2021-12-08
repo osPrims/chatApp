@@ -1,3 +1,4 @@
+/* ################################### STYLING INDEX.HTML ########################################### */
 body {
   margin: 0;
   padding-bottom: 3rem;
@@ -5,6 +6,7 @@ body {
   background-color: cyan;
 }
 
+/* ################################### STYLING HEADER ############################################## */
 #header img {
   height: 100px;
   left: 32%;
@@ -82,10 +84,15 @@ body {
   background-color: #f1f1f1;
   width: 10rem;
   border-radius: 10px;
+}
+
+div.content {
   margin-top: 0.3rem;
   padding: 0;
 }
 
+
+/* ############################################ STYLING MAIN ################################## */
 #main {
   width: 95%;
   position: absolute;
@@ -123,7 +130,7 @@ body {
   padding: 0;
 }
 
-#messages > li {
+#messages>li {
   padding: 0.5rem 1rem;
   padding-bottom: 0.7rem;
   border-radius: 20px;
@@ -162,6 +169,7 @@ body {
   clear: both;
 }
 
+/* ##################################### STYLING FORM ################################# */
 #form {
   /* background: rgba(0, 0, 0, 0.15); */
   padding: 0.25rem;
@@ -175,6 +183,7 @@ body {
   backdrop-filter: blur(10px);
   background-color: #1a4d5e;
 }
+
 #username {
   outline: none;
   border: none;
@@ -184,7 +193,9 @@ body {
   margin: auto 10px;
   width: 200px;
   border-radius: 20px;
+  font-family: FontAwesome, Arial;
 }
+
 #input {
   border: none;
   padding: 0 1rem;
@@ -193,12 +204,14 @@ body {
   margin: auto 10px;
   height: 40px;
   width: 900px;
+  font-family: FontAwesome, Arial;
 }
 
 #input:focus {
   outline: none;
 }
-#form > button {
+
+#form>button {
   background: #333;
   border: none;
   padding: 0 1rem;
