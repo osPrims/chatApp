@@ -5,10 +5,18 @@ let feedback = document.getElementById("feedback");
 let username = document.getElementById("username");
 let messages = document.getElementById('messages')
 let online = document.getElementById('online');
+let sendBtn = document.querySelector('.btn--send');
 let list = document.querySelector('#messages');
 let forms = document.forms;
 let users = []
 let selfId
+let md
+
+md = window.markdownit({
+  html: false,
+  linkify: true,
+  typographer: true
+});
 
 // Color for the messages 
 let colors = ['#0080FF', '#8000FF' , '#FF00FF' , '#FF0080','#FF0000','#FF8000','#80FF00','#00FF00','#00FF80']
@@ -105,7 +113,8 @@ socket.on("chat message", (user, msg) => {
     item.style.color = current_user[0].color
   }
 
-  item.innerHTML = `<b>${ user.name }: </b>` + `<div class="userMsg">${msg}</div>`;
+  item.innerHTML = `<b>${user.name}&nbsp;</b><br>` + `<div class="userMsg">${md.render(msg)}</div>`;
+  // item.innerHTML = `<b>${ user.name }: </b>` + `<div class="userMsg">${msg}</div>`;
   item.classList.add('messages')
   messages.appendChild(item)
 
@@ -188,4 +197,27 @@ searchBar.addEventListener('keyup', (e) => {
       msgList.parentNode.style.display = 'none';
     }
   });
+});
+sendBtn.addEventListener('mousedown', () => {
+  if (input.value) {
+    sendBtn.innerHTML = 'Sent &nbsp;<i class="fas fa-chevron-circle-right"></i>'
+    sendBtn.style.backgroundColor = '#38b000'
+  }
+});
+
+sendBtn.addEventListener('mouseup', () => {
+  setTimeout(() => {
+    sendBtn.innerHTML = 'Send <i class="fas fa-chevron-circle-right"></i>'
+    sendBtn.style.backgroundColor = '#ed1c24'
+  }, 400);
+});
+
+input.addEventListener("keyup", function (event) {
+  if (event.key === 'Enter') {
+    sendBtn.click();
+    sendBtn.style.backgroundColor = '#38b000'
+    setTimeout(() => {
+      sendBtn.style.backgroundColor = '#ed1c24'
+    }, 400);
+  }
 });
