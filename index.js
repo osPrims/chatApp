@@ -176,31 +176,32 @@ app.get("/users", (req, res) => {
 // When a connection is received
 io.on("connection", (socket) => {
   console.log("A user has connected");
-  io.emit("connected", socket.id);
+  io.emit("connected", {id:socket.id,name:userentered});
   getmessages(socket);
 
   socket.name = "";
   let filtered_users = users.filter((user) => user.id == socket.id);
   if (filtered_users != []) {
     users.push({
-      name: "Anonymous",
+      name:userentered,
       id: socket.id,
       email:useremail
     });
   }
 
   // Receiving a chat message from client
-  socket.on("chat message", (user_name, msg) => {
+  socket.on("chat message", (msg) => {
     console.log("Received a chat message");
-    console.log(user_name + "(user): ", msg);
+   
     let current_user = users.filter((user) => user.id === socket.id);
      const mail=current_user[0].email 
-    storemessage(user_name, msg, mail);
-    socket.name = user_name;
+     const name=current_user[0].name
+    storemessage(name, msg, mail);
+    socket.name = name;
     console.log(socket.name);
     io.emit("chat message", { name: socket.name, id: socket.id }, msg);
      current_user = users.filter((user) => user.id === socket.id);
-    current_user[0].name = user_name;
+    
   });
 
   // Received when some client is typing
