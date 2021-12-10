@@ -1,69 +1,217 @@
 // Usual Express and Socket.IO stuff
 require("dotenv").config();
+const bcrypt=require("bcrypt");
 const express = require("express");
-let favicon = require('serve-favicon');
+let favicon = require("serve-favicon");
 const app = express();
 const http = require("http");
+const cookieParser=require("cookie-parser");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
-const port = process.env.PORT || 8080
-let users = []; 
 require("./database/conn");
-const Message=require("./database/registers");
-const getmessages=async(socket)=>{
-  const result=await Message.find().sort({_id:1});
-  socket.emit("output",result);
-
-}
-const storemessage=async(user_name,msg)=>{
-  const message=new Message ({name:user_name,
-    message: msg});
-  await message.save();}
+const {requireauth}=require("./middleware/auth");
+const jwt=require("jsonwebtoken");
+const Message = require("./database/registers");
+const User = require("./database/signupschema");
 // Load external styles and scripts from folder 'public'
 app.use(express.static("public"));
+app.use(express.json());
+app.use(cookieParser());
+/******************************************************************************************/
+const port = process.env.PORT || 8080;
+let users = [];
+let err1 = { email: "", password: "" };
+let userentered;
+let useremail;
+/****************************************************************************************/
+const getmessages = async (socket) => {
+  const result = await Message.find().sort({ _id: 1 });
+  socket.emit("output", {result:result,useremail:useremail});
+};
+const storemessage = async (user_name, msg,mail) => {
+  const message = new Message({ name: user_name, message: msg,email:mail });
+  await message.save();
+};
+
+const handlerror = (err) => {
+  let errors = { email: "", password: "" };
+  
+  if (err.code === 11000) {
+    errors.email = "email already exist";
+    return errors;
+  }
+  if (err.message.includes("user validation failed")) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
+  }
+  return errors;
+};
+const maxAge=3*24*60*60;
+const createtoken=(id)=>{
+  return jwt.sign({id},"ankitgarg",{
+    expiresIn:maxAge
+  });
+}
+/****************************************************************************************** */
 
 //to serve favicon
-app.use(favicon(__dirname + '/public/img/favicon.ico'));
+app.use(favicon(__dirname + "/public/img/favicon.ico"));
 
 // Serve the main file
-app.get("/", (req, res) => {
+
+app.get("/",requireauth, (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-// Serve list of users 
+
+//handling signup
+app.get("/signup", (req, res) => {
+  res.sendFile(__dirname + "/signup.html");
+}); 
+
+
+
+//handling sign post request
+app.post("/signup", async (req, res) => {
+  try {
+   
+    if (req.body.password === req.body.conpassword) {
+     
+      const user = new User({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+      });
+      await user.save();
+     
+      res.status(201).json({user:user._id});
+      
+    } else {
+      throw "Password does not matches";
+    }
+  } catch (err) {
+    
+    if (err != "Password does not matches") {
+      err1 = handlerror(err);
+    }
+    if (err == "Password does not matches" && err1.password == "") {
+      if (err1.email != "email already exist") {
+        
+        err1.password = "Password does not matches";
+      }
+    }
+    
+    console.log(err1);
+    let error={...err1};
+    err1.password="";
+    err1.email="";
+    res.status(400).json({ error });
+  }
+});
+
+
+//handling login
+app.get("/login", (req, res) => {
+  res.sendFile(__dirname + "/login.html");
+});
+app.post("/login", async (req, res) => {
+  try {
+    const user=await User.findOne({email:req.body.email});
+   console.log(user);
+    if(!user)
+    {
+      console.log("inside error block")
+     throw "Invalid Email";
+    }
+    userentered=user.username;
+    useremail=user.email;
+    
+    if(user)
+    {
+     
+    const auth= await bcrypt.compare(req.body.password,user.password)
+   
+    if(auth)
+    {
+      const token=createtoken(user._id);
+      res.cookie("login",token,{httpOnly:true,maxAge:maxAge*1000});
+
+      res.status(200).json({user:user._id});
+    }
+    else{
+      
+    throw Error("Incorrent password");
+    }
+    }
+  } 
+  catch (err){
+  
+    if(err=="Invalid Email"){
+      err1.email="Email not registered";
+ 
+     }
+    else {
+
+      err1.password="Incorrect password"
+    }
+  
+    
+    
+    let error={...err1};
+    err1.password=""
+    err1.email=""
+    console.log(error);
+    res.status(400).json({error});
+  }
+});
+
+// Serve list of users
 app.get("/users", (req, res) => {
   res.send(users);
 });
+/***************************************************************************************************** */
 
+// When a connection is received
 io.on("connection", (socket) => {
   console.log("A user has connected");
-  socket.broadcast.emit("connected", socket.id);
- getmessages(socket);
- 
-  socket.name ="";
+  io.emit("connected", socket.id);
+  getmessages(socket);
+
+  socket.name = "";
   let filtered_users = users.filter((user) => user.id == socket.id);
   if (filtered_users != []) {
     users.push({
-      name: "Annonimus",
-      id: socket.id
+      name: "Anonymous",
+      id: socket.id,
+      email:useremail
     });
   }
+
+  // Receiving a chat message from client
   socket.on("chat message", (user_name, msg) => {
+    console.log("Received a chat message");
     console.log(user_name + "(user): ", msg);
-    storemessage(user_name, msg);
+    let current_user = users.filter((user) => user.id === socket.id);
+     const mail=current_user[0].email 
+    storemessage(user_name, msg, mail);
     socket.name = user_name;
+    console.log(socket.name);
     io.emit("chat message", { name: socket.name, id: socket.id }, msg);
-    let current_user = users.filter((user) => { if (user.id == socket.id) { user.name = user_name } });
+     current_user = users.filter((user) => user.id === socket.id);
+    current_user[0].name = user_name;
   });
 
+  // Received when some client is typing
   socket.on("typing", (user) => {
     socket.broadcast.emit("typing", user);
   });
 
+  // Sent to all clients when a socket is disconnected
   socket.on("disconnect", () => {
     console.log("A user has disconnected");
-    users = users.filter((user) => user.id != socket.id);
+    users = users.filter((user) => user.id !== socket.id);
     io.emit("disconnected", socket.id);
   });
 });

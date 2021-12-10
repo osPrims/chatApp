@@ -8,6 +8,10 @@ const chatSchema =new mongoose.Schema({
     message:{
        type:String,
        required:true
+    },
+    email:{
+        type:String,
+        required:true
     }
 });
 const Message= new mongoose.model("message",chatSchema);
