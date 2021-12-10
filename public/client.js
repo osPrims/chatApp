@@ -48,7 +48,7 @@ fetch("/users")
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (input.value) {
-    socket.emit("chat message", username.value, input.value);
+    socket.emit("chat message", input.value);
     input.value = "";
   }
   if (username.readOnly === false) {
@@ -58,10 +58,10 @@ form.addEventListener("submit", (e) => {
 });
 
 // Received from server when someone gets connected
-socket.on("connected", (id) => {
+socket.on("connected", ({id,name}) => {
 
-  users.push({ name: "Anonymous", id: id, color: colors[0] })
-  addusertolist({ name: "Anonymous", id: id, color: colors[0] })
+  users.push({ name: name, id: id, color: colors[0] })
+  addusertolist({ name:name, id: id, color: colors[0] })
   colors = colors.splice(1)
 
   if (selfId) {
