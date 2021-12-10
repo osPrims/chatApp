@@ -128,15 +128,22 @@ socket.on("chat message", (user, msg) => {
     }
   });
 });
-socket.on("output",(result)=>{
-  
+socket.on("output",({result,useremail})=>{
+   console.log(result);
   if(result.length)
   {
     for(var x=0;x<result.length;x++)
     {
       let item = document.createElement("li");
-      item.innerHTML = `<b>${ result[x].name }: </b>` + result[x].message ;
+      item.innerHTML = `<b>${result[x].name}&nbsp;</b><br>` + md.render(result[x].message);
+      if(result[x].email==useremail)
+      {
+        item.classList.add("useridentified");
+      }
+      else{
+      item.classList.add('messages');
       
+      }
       messages.appendChild(item);
     }
   }

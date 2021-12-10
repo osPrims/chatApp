@@ -141,7 +141,10 @@ div.content {
   float: left;
   background-color: white;
 }
-
+.useridentified{
+  float:right;
+  background-color: gold;
+}
 .self {
   color: rgb(0, 0, 255);
   background-color: gold;
