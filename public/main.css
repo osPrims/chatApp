@@ -50,7 +50,7 @@ body {
   margin-right: 11px;
 }
 
-.search-messages{
+.search-messages {
   display: inline-block;
   margin-left: 100px;
   margin-top: 20px;
@@ -223,4 +223,8 @@ input {
   outline: none;
   color: #fff;
   font-size: 1.2rem;
+}
+.time {
+  font-size: 0.8rem;
+  color: #333;
 }
