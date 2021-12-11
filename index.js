@@ -14,6 +14,9 @@ const {requireauth}=require("./middleware/auth");
 const jwt=require("jsonwebtoken");
 const Message = require("./database/registers");
 const User = require("./database/signupschema");
+
+const moment = require("moment");
+
 // Load external styles and scripts from folder 'public'
 app.use(express.static("public"));
 app.use(express.json());
@@ -222,21 +225,20 @@ io.on("connection", (socket) => {
   // Receiving a chat message from client
   socket.on("chat message", (msg) => {
     console.log("Received a chat message");
-   
+    let time = moment().utcOffset("+05:30").format('hh:mm A');
+    io.emit("chat message", { name: socket.name, id: socket.id }, msg, time);
     let current_user = users.filter((user) => user.id === socket.id);
      const mail=current_user[0].email 
      const name=current_user[0].name
     storemessage(name, msg, mail);
     socket.name = name;
-    console.log(socket.name);
-    io.emit("chat message", { name: socket.name, id: socket.id }, msg);
-     current_user = users.filter((user) => user.id === socket.id);
+  
     
   });
 
   // Received when some client is typing
   socket.on("typing", (user) => {
-    socket.broadcast.emit("typing",user);
+    socket.broadcast.emit("typing", user);
   });
 
   // Sent to all clients when a socket is disconnected

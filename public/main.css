@@ -21,9 +21,9 @@ body {
 }
 
 #header nav {
-  right: -85%;
+  right: 3rem;
   top: 24px;
-  position: relative;
+  position: absolute;
 }
 
 #online {
@@ -50,7 +50,7 @@ body {
   margin-right: 11px;
 }
 
-.search-messages{
+.search-messages {
   display: inline-block;
   margin-left: 100px;
   margin-top: 20px;
@@ -61,7 +61,7 @@ body {
   color: white;
   cursor: pointer;
   padding: 18px;
-  width: 12%;
+  width: 10rem;
   border: none;
   text-align: left;
   outline: none;
@@ -80,10 +80,8 @@ body {
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
-  width: 12%;
+  width: 10rem;
   border-radius: 10px;
-}
-div.content {
   margin-top: 0.3rem;
   padding: 0;
 }
@@ -228,4 +226,8 @@ input {
   outline: none;
   color: #fff;
   font-size: 1.2rem;
+}
+.time {
+  font-size: 0.8rem;
+  color: #333;
 }
