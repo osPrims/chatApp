@@ -9,7 +9,6 @@ const io = new Server(server);
 const port = process.env.PORT || 8080
 const moment = require("moment");
 let users = [];
-let time = moment().format("h:mm a");
 // Load external styles and scripts from folder 'public'
 app.use(express.static("public"));
 
@@ -47,6 +46,7 @@ io.on("connection", (socket) => {
     console.log('Received a chat message')
     console.log(user_name + "(user): ", msg);
     socket.name = user_name;
+    let time = moment().format('hh:mm A');
     io.emit("chat message", { name: socket.name, id: socket.id }, msg, time);
     let current_user = users.filter((user) => user.id === socket.id);
     current_user[0].name = user_name
