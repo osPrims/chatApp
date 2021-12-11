@@ -24,6 +24,7 @@ let users = [];
 let err1 = { email: "", password: "" };
 let userentered;
 let useremail;
+let user1;
 /****************************************************************************************/
 const getmessages = async (socket) => {
   const result = await Message.find().sort({ _id: 1 });
@@ -53,15 +54,45 @@ const createtoken=(id)=>{
   return jwt.sign({id},"ankitgarg",{
     expiresIn:maxAge
   });
-}
+};
+
+
+const checkuser=(req,res,next)=>{
+  const token=req.cookies.login;
+  if(token)
+  {
+      jwt.verify(token,"ankitgarg",async(err, decodedToken)=>{
+          if(err)
+          {
+              
+              user1=null;
+              next();
+          }
+              else{
+                  console.log(decodedToken);
+                  let user=await User.findById(decodedToken.id);
+                  console.log(user);
+                  user1=user;
+                  next();
+              }
+          }
+      )
+  }
+  else{
+      user1=null;
+      next();
+  }
+};
 /****************************************************************************************** */
 
 //to serve favicon
 app.use(favicon(__dirname + "/public/img/favicon.ico"));
 
 // Serve the main file
-
+app.get("*",checkuser);
 app.get("/",requireauth, (req, res) => {
+  userentered=user1.username;
+    useremail=user1.email;
   res.sendFile(__dirname + "/index.html");
 });
 
@@ -125,8 +156,7 @@ app.post("/login", async (req, res) => {
       console.log("inside error block")
      throw "Invalid Email";
     }
-    userentered=user.username;
-    useremail=user.email;
+    
     
     if(user)
     {
