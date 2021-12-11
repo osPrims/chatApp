@@ -33,8 +33,8 @@ const getmessages = async (socket) => {
   const result = await Message.find().sort({ _id: 1 });
   socket.emit("output", {result:result,useremail:useremail});
 };
-const storemessage = async (user_name, msg,mail) => {
-  const message = new Message({ name: user_name, message: msg,email:mail });
+const storemessage = async (user_name, msg,mail,time) => {
+  const message = new Message({ name: user_name, message: msg,email:mail,time:time });
   await message.save();
 };
 
@@ -233,7 +233,7 @@ io.on("connection", (socket) => {
     io.emit("chat message", { name: socket.name, id: socket.id }, msg, time);
     
     
-    storemessage(name, msg, mail);
+    storemessage(name, msg, mail,time);
     
   
     

@@ -71,7 +71,7 @@ socket.on("connected", ({id,name}) => {
     let item = document.createElement("li");
     item.className = 'connection'
     item.style.color = "black";
-    item.textContent = "A user has connected";
+    item.textContent = ` ${name} has connected` ;
     item.style.backgroundColor = "LightGray";
     messages.appendChild(item);
   }
@@ -140,7 +140,8 @@ socket.on("output",({result,useremail})=>{
     for(var x=0;x<result.length;x++)
     {
       let item = document.createElement("li");
-      item.innerHTML = `<b>${result[x].name}&nbsp;</b><br>` + md.render(result[x].message);
+      item.innerHTML = `<b>${result[x].name}&nbsp;</b> <span class="time">${result[x].time} </span>` + `<div class="userMsg">${md.render(result[x].message)}</div>`;
+      
       if(result[x].email==useremail)
       {
         item.classList.add("useridentified");
@@ -152,7 +153,17 @@ socket.on("output",({result,useremail})=>{
       messages.appendChild(item);
     }
   }
+  scroll('main')
 })
+function scroll(id) {
+  var div = document.getElementById(id)
+  var scrollHeight = div.scrollHeight
+  div.scroll({
+    top: scrollHeight + 10,
+   
+  })
+}
+
 
 // Sent to server when you type
 input.addEventListener("keypress", () => {
