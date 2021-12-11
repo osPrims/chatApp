@@ -49,8 +49,8 @@ fetch("/users")
 // Sent a chat message to server when submit a form
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (input.value ) {
-    socket.emit("chat message", username.value, input.value);
+  if (input.value) {
+    socket.emit("chat message", input.value);
     input.value = "";
   }
   if (username.readOnly === false) {
@@ -60,10 +60,10 @@ form.addEventListener("submit", (e) => {
 });
 
 // Received from server when someone gets connected
-socket.on("connected", (id) => {
+socket.on("connected", ({id,name}) => {
 
-  users.push({ name:"Anonymous", id: id, color : colors[0] })
-  addusertolist({ name: "Anonymous", id: id, color : colors[0]})
+  users.push({ name: name, id: id, color: colors[0] })
+  addusertolist({ name:name, id: id, color: colors[0] })
   colors = colors.splice(1)
 
   if(selfId){
@@ -104,9 +104,9 @@ socket.on("disconnected", (id) => {
 // Recieved from a server when a chat message is received
 socket.on("chat message", (user, msg) => {
   let item = document.createElement("li");
-  item.className = user.id
-  let current_user = users.filter((_user_)=> _user_.id === user.id)
-  if(selfId === user.id){
+  item.className = user.id;
+  let current_user = users.filter((_user_) => _user_.id === user.id)
+  if (selfId === user.id) {
     item.classList.add('self')
   }
   else{
@@ -130,6 +130,26 @@ socket.on("chat message", (user, msg) => {
       item.innerHTML = '<span class="dot"></span>' + user.name;
     }
   });
+});
+socket.on("output",({result,useremail})=>{
+   console.log(result);
+  if(result.length)
+  {
+    for(var x=0;x<result.length;x++)
+    {
+      let item = document.createElement("li");
+      item.innerHTML = `<b>${result[x].name}&nbsp;</b><br>` + md.render(result[x].message);
+      if(result[x].email==useremail)
+      {
+        item.classList.add("useridentified");
+      }
+      else{
+      item.classList.add('messages');
+      
+      }
+      messages.appendChild(item);
+    }
+  }
 })
 
 // Sent to server when you type
