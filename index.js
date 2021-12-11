@@ -7,8 +7,9 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 const port = process.env.PORT || 8080
+const moment = require("moment");
 let users = [];
-
+let time = moment().format("h:mm a");
 // Load external styles and scripts from folder 'public'
 app.use(express.static("public"));
 
@@ -32,12 +33,13 @@ io.on("connection", (socket) => {
   // Emiting to all clients a user has connected
   io.emit("connected", socket.id)
 
-  socket.name =""
+  socket.name = ""
   let filtered_user = users.filter((user) => user.id === socket.id)
-  if(!filtered_user.length) {
+  if (!filtered_user.length) {
     users.push({
       name: "Anonymous",
-      id : socket.id });
+      id: socket.id
+    });
   }
 
   // Receiving a chat message from client
@@ -45,14 +47,14 @@ io.on("connection", (socket) => {
     console.log('Received a chat message')
     console.log(user_name + "(user): ", msg);
     socket.name = user_name;
-    io.emit("chat message", {name:socket.name, id:socket.id} , msg);
+    io.emit("chat message", { name: socket.name, id: socket.id }, msg, time);
     let current_user = users.filter((user) => user.id === socket.id);
     current_user[0].name = user_name
   });
 
   // Received when some client is typing
   socket.on("typing", (user) => {
-    socket.broadcast.emit("typing",user);
+    socket.broadcast.emit("typing", user);
   });
 
   // Sent to all clients when a socket is disconnected
