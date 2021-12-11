@@ -28,9 +28,10 @@ In order to succesfully run the project on your local system, you will need to s
 4. Install the required Node.js modules by running `npm install`
    (make sure you have [Node.js](https://nodejs.org/en/download/) installed on your system)  
    ![image](https://user-images.githubusercontent.com/70942982/143769635-a7dc31c9-6681-4032-b181-1045330d149e.png)
+5. Run the project by writing `node index.js` and visiting `localhost:8080` on your browser.
 
 
-#### Downloading and Installing MongoDB on Windows
+<!-- #### Downloading and Installing MongoDB on Windows
 
 1. Download MongoDB Community server from [their site](https://www.mongodb.com/try/download/community).  
    ![image](https://user-images.githubusercontent.com/70942982/145673558-3ed3f457-0c89-43ab-b64e-fed285ecb076.png)
@@ -38,11 +39,11 @@ In order to succesfully run the project on your local system, you will need to s
 2. Select 'Complete' in their 'choose setup type' section of the installer.  
    ![image](https://user-images.githubusercontent.com/70942982/145673581-8977bf8e-8564-4e81-9e62-5bc7a6064623.png)
 
-3. On the next section, select *Install MongoDB as a service* ----> *Run service as Network Service user*  
+3. On the next section, select *Install MongoDB as a service* -> *Run service as Network Service user*  
    ![image](https://user-images.githubusercontent.com/70942982/145673593-a7aff4fd-7420-4aef-9b69-3212ffb0dbc9.png)
 
 4. Install MongoDB compass (GUI Interface for MongoDB)
 5. *Install*
-   
+    -->
 ---
 Open the folder in your choice of editor to edit and make changes to the project.
