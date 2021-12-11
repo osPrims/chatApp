@@ -226,11 +226,13 @@ io.on("connection", (socket) => {
   socket.on("chat message", (msg) => {
     console.log("Received a chat message");
     let time = moment().utcOffset("+05:30").format('hh:mm A');
+    let current_user = users.filter((user) => user.id === socket.id);
+    const mail=current_user[0].email 
+    const name=current_user[0].name
     socket.name = name;
     io.emit("chat message", { name: socket.name, id: socket.id }, msg, time);
-    let current_user = users.filter((user) => user.id === socket.id);
-     const mail=current_user[0].email 
-     const name=current_user[0].name
+    
+    
     storemessage(name, msg, mail);
     
   
