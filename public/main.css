@@ -231,3 +231,18 @@ input {
   font-size: 0.8rem;
   color: #333;
 }
+
+.logoutlink{
+  float:right;
+  background-color: rgb(237, 28, 36);
+  margin-right: 20px;
+  border:1px solid rgb(8, 8, 8);
+  color:white;
+  text-decoration: none;
+ 
+}
+.logoutlink:hover{
+  color:white;
+  background-color:rgb(250, 7, 15) ;
+}
+
