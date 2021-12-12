@@ -204,11 +204,13 @@ app.post("/login", async (req, res) => {
 app.get("/users", (req, res) => {
   res.send(users);
 });
+
 //logout
 app.get("/logout",(req,res)=>{
   res.cookie("login","",{maxAge:1})
   res.redirect("/login");
 })
+
 /***************************************************************************************************** */
 
 // When a connection is received
