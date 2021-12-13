@@ -46,7 +46,10 @@ In order to succesfully run the project on your local system, you will need to s
    ```
    MONGO_URL="mongodb://127.0.0.1:27017"
    ```  
-7. Make sure the `MongoDB Database Server` background process is running (in Task Manager). In case it isn't open `services.msc` from Windows search/Run and right-click and start the process `MongoDB Server`.
+   ![image](https://user-images.githubusercontent.com/70942982/145827232-f1b0c5b8-fd70-4913-add7-f205ec9ff3ef.png)
+7. Make sure the `MongoDB Database Server` background process is running (in Task Manager). In case it isn't open `services.msc` from Windows search/Run and right-click and start the process `MongoDB Server`.  
+   ![image](https://user-images.githubusercontent.com/70942982/145827387-315e3db6-aba7-4282-bde0-bcf14adffaf6.png)
+
 8. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
 <br/>
 
