@@ -28,10 +28,8 @@ In order to succesfully run the project on your local system, you will need to s
 4. Install the required Node.js modules by running `npm install`
    (make sure you have [Node.js](https://nodejs.org/en/download/) installed on your system)  
    ![image](https://user-images.githubusercontent.com/70942982/143769635-a7dc31c9-6681-4032-b181-1045330d149e.png)
-5. Run the project by writing `node index.js` and visiting `localhost:8080` on your browser.
 
-
-<!-- #### Downloading and Installing MongoDB on Windows
+#### Downloading and Installing MongoDB on Windows
 
 1. Download MongoDB Community server from [their site](https://www.mongodb.com/try/download/community).  
    ![image](https://user-images.githubusercontent.com/70942982/145673558-3ed3f457-0c89-43ab-b64e-fed285ecb076.png)
@@ -44,6 +42,16 @@ In order to succesfully run the project on your local system, you will need to s
 
 4. Install MongoDB compass (GUI Interface for MongoDB)
 5. *Install*
-    -->
+6. Create a file named `.env`  in the project directory and write the following line in it -
+   ```
+   MONGO_URL="mongodb://127.0.0.1:27017"
+   ```  
+7. Make sure the `MongoDB Database Server` background process is running (in Task Manager). In case it isn't open `services.msc` from Windows search/Run and right-click and start the process `MongoDB Server`.
+8. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
+<br/>
+
+You are required to sign up with an Email ID/Password (can be anything, a valid Email ID is not required so far). Login with the credentials and you'll land at the ChatApp's main page.
+
+   
 ---
-Open the folder in your choice of editor to edit and make changes to the project.
+Open the folder in your choice of editor to edit to make changes to the project.
