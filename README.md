@@ -55,6 +55,11 @@ In order to succesfully run the project on your local system, you will need to s
 
 You are required to sign up with an Email ID/Password (can be anything, a valid Email ID is not required so far). Login with the credentials and you'll land at the ChatApp's main page.
 
-   
+---
+## Screenshots
+![Screenshot from 2021-12-16 18-40-40](https://user-images.githubusercontent.com/33419526/146378487-b89d03d4-b268-4d9c-9869-f38bd46a716b.png)
+![Screenshot from 2021-12-16 18-41-19](https://user-images.githubusercontent.com/33419526/146378578-040761f6-c83d-4916-938c-8973eeca57a9.png)
+![Screenshot from 2021-12-16 18-42-29](https://user-images.githubusercontent.com/33419526/146378648-d92dab0e-dae8-4b0a-aca6-99e36035d2c3.png)
+
 ---
 Open the folder in your choice of editor to edit to make changes to the project.
