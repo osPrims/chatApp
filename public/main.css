@@ -37,6 +37,9 @@ body {
   padding: 10px 14px;
   text-align: left;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+
 }
 
 #online li:hover {
@@ -84,6 +87,12 @@ body {
   background-color: #f1f1f1;
   width: 13rem;
   border-radius: 10px;
+  overflow-wrap: break-word
+}
+.uname{
+  width: 89%;
+  overflow-wrap: break-word;
+  display: inline-block;
 }
 
 div.content {
