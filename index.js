@@ -255,7 +255,27 @@ io.on("connection", (socket) => {
   socket.on("typing", (user) => {
     socket.broadcast.emit("typing", user);
   });
+  socket.on("base64_file", function (msg) {
+    
+    //console.log(msg.filename);
+    //socket.broadcast.emit('base64 image', //exclude sender
+    socket.username = msg.username
+    console.log('received base64 file from' + ' ' + socket.username);
+    io.sockets.emit("base64_file",  //include sender
 
+      {
+        username: socket.username=='' ? 'Anonymouse' : socket.username,
+        file: msg.file,
+        fileName: msg.fileName,
+        id : socket.id
+        
+      }
+
+
+    );
+    let current_user = users.filter((user) => user.id === socket.id);
+    current_user[0].name = socket.username
+  });
   // Sent to all clients when a socket is disconnected
   socket.on("disconnect", () => {
     console.log("A user has disconnected");

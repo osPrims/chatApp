@@ -54,6 +54,19 @@ form.addEventListener("submit", (e) => {
 
     input.value = "";
   }
+  const data = document.querySelector('input[type=file]').files[0];
+  const reader = new FileReader();
+  reader.onload = function(evt){
+    var msg = {};
+
+    msg.file = evt.target.result;
+    msg.fileName = data.name;
+    msg.username = username.value;
+    socket.emit("base64_file",msg);
+    //console.log(msg);
+  };
+  reader.readAsDataURL(data);
+  
   if (username.readOnly === false) {
     username.readOnly = true;
     username.style.backgroundColor = "gold"
@@ -177,7 +190,30 @@ socket.on("typing", (user) => {
     feedback.innerHTML = "";
   }, 2000);
 });
+socket.on("base64_file", (data) => {
 
+  var listitem = document.createElement('li');
+  var curr_user_img = users.filter((_user_) => _user_.id === data.id);
+  if (selfId === data.id) {
+    listitem.classList.add('self')
+  }
+  else{
+    listitem.style.color = current_user_img[0].color
+  }
+  listitem.innerHTML = `<p>${data.username}</p><img class="imgupload" src="${data.file}" height="200" width="200"/>`
+  messages.appendChild(listitem);
+  input_file.value = "";
+  feedback.innerHTML = "";
+  scrollSmoothToBottom('main')
+  if (data.id !== selfId) playSound('/notification.mp3')
+  users.forEach((saved_user) => {
+    if (saved_user.id === data.id) {
+      saved_user.name = data.username
+      let item = document.getElementById(data.id);
+      item.innerHTML = '<span class="dot"></span>' + user.name;
+    }
+  });
+});
 // Add user to collapsible
 let addusertolist = (user) => {
   let item = document.createElement("li");
