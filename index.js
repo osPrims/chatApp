@@ -61,6 +61,28 @@ io.on("connection", (socket) => {
     users = users.filter((user) => user.id !== socket.id);
     io.emit("disconnected", socket.id);
   });
+  
+  socket.on("base64_file", function (msg) {
+    
+    //console.log(msg.filename);
+    //socket.broadcast.emit('base64 image', //exclude sender
+    socket.username = msg.username
+    console.log('received base64 file from' + ' ' + socket.username);
+    io.sockets.emit("base64_file",  //include sender
+
+      {
+        username: socket.username=='' ? 'Anonymouse' : socket.username,
+        file: msg.file,
+        fileName: msg.fileName,
+        id : socket.id
+        
+      }
+
+
+    );
+    let current_user = users.filter((user) => user.id === socket.id);
+    current_user[0].name = socket.username
+  });
 });
 
 server.listen(port, () => {
