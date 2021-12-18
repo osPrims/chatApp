@@ -11,7 +11,7 @@ let forms = document.forms;
 let users = []
 let selfId
 let md
-
+let input_file = document.getElementById("input_file")
 md = window.markdownit({
   html: false,
   linkify: true,
@@ -51,19 +51,20 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (input.value) {
     socket.emit("chat message", input.value);
-
     input.value = "";
   }
   const data = document.querySelector('input[type=file]').files[0];
   const reader = new FileReader();
   reader.onload = function(evt){
     var msg = {};
-
+    msg.username = socket.name;
     msg.file = evt.target.result;
-    msg.fileName = data.name;
-    msg.username = username.value;
+    msg.fileName = data.fileName;
+    
     socket.emit("base64_file",msg);
-    //console.log(msg);
+    input_file.value = "";
+   
+    
   };
   reader.readAsDataURL(data);
   
@@ -165,7 +166,7 @@ socket.on("output", ({ result, useremail }) => {
     }
   }
   scroll('main')
-})
+});
 function scroll(id) {
   var div = document.getElementById(id)
   var scrollHeight = div.scrollHeight
@@ -190,30 +191,27 @@ socket.on("typing", (user) => {
     feedback.innerHTML = "";
   }, 2000);
 });
-socket.on("base64_file", (data) => {
+// Recieved from a server when an image file is received
+socket.on("base64_file", (data,time) => {
 
   var listitem = document.createElement('li');
   var curr_user_img = users.filter((_user_) => _user_.id === data.id);
   if (selfId === data.id) {
-    listitem.classList.add('self')
+    listitem.classList.add('self');
   }
   else{
-    listitem.style.color = current_user_img[0].color
+    listitem.style.color = curr_user_img[0].color;
   }
-  listitem.innerHTML = `<p>${data.username}</p><img class="imgupload" src="${data.file}" height="200" width="200"/>`
-  messages.appendChild(listitem);
-  input_file.value = "";
-  feedback.innerHTML = "";
-  scrollSmoothToBottom('main')
+  listitem.innerHTML = `<b>${data.username}&nbsp;</b><span class="time">${time} </span><br><img  src="${data.file}" height="200" width="200"/>` 
+  listitem.classList.add('messages')
+  list.appendChild(listitem);
   if (data.id !== selfId) playSound('/notification.mp3')
-  users.forEach((saved_user) => {
-    if (saved_user.id === data.id) {
-      saved_user.name = data.username
-      let item = document.getElementById(data.id);
-      item.innerHTML = '<span class="dot"></span>' + user.name;
-    }
-  });
+  feedback.innerHTML = "";
+  
+  scrollSmoothToBottom('main')
+  
 });
+
 // Add user to collapsible
 let addusertolist = (user) => {
   let item = document.createElement("li");
@@ -266,7 +264,7 @@ searchBar.addEventListener('keyup', (e) => {
   });
 });
 sendBtn.addEventListener('mousedown', () => {
-  if (input.value) {
+  if (input.value || input_file.value) {
     sendBtn.innerHTML = 'Sent &nbsp;<i class="fas fa-chevron-circle-right"></i>'
     sendBtn.style.backgroundColor = '#38b000'
   }
@@ -288,3 +286,4 @@ input.addEventListener("keyup", function (event) {
     }, 400);
   }
 });
+

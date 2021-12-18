@@ -16,6 +16,7 @@ const Message = require("./database/registers");
 const User = require("./database/signupschema");
 
 const moment = require("moment");
+const { timeEnd } = require("console");
 
 // Load external styles and scripts from folder 'public'
 app.use(express.static("public"));
@@ -255,26 +256,20 @@ io.on("connection", (socket) => {
   socket.on("typing", (user) => {
     socket.broadcast.emit("typing", user);
   });
+  // Receiving an image file from client
   socket.on("base64_file", function (msg) {
-    
-    //console.log(msg.filename);
-    //socket.broadcast.emit('base64 image', //exclude sender
-    socket.username = msg.username
-    console.log('received base64 file from' + ' ' + socket.username);
-    io.sockets.emit("base64_file",  //include sender
-
-      {
-        username: socket.username=='' ? 'Anonymouse' : socket.username,
-        file: msg.file,
-        fileName: msg.fileName,
-        id : socket.id
-        
-      }
-
-
-    );
     let current_user = users.filter((user) => user.id === socket.id);
-    current_user[0].name = socket.username
+    const name = current_user[0].name
+    socket.name = name;
+    let time = moment().utcOffset("+05:30").format('hh:mm A');
+    console.log(`received base64 file from ${socket.name}`);
+    var data = {};
+    data.fileName = msg.fileName;
+    data.file = msg.file;
+    data.id = socket.id
+    data.username = (socket.name == '' ? "Anonymous":socket.name);
+    io.sockets.emit("base64_file",data,time);
+    
   });
   // Sent to all clients when a socket is disconnected
   socket.on("disconnect", () => {
