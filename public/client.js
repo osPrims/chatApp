@@ -11,7 +11,8 @@ let forms = document.forms;
 let users = []
 let selfId
 let md
-let input_file = document.getElementById("input_file")
+let input_file = document.getElementById("input_file");
+let label = document.getElementsByClassName("file");
 md = window.markdownit({
   html: false,
   linkify: true,
@@ -53,21 +54,6 @@ form.addEventListener("submit", (e) => {
     socket.emit("chat message", input.value);
     input.value = "";
   }
-  const data = document.querySelector('input[type=file]').files[0];
-  const reader = new FileReader();
-  reader.onload = function(evt){
-    var msg = {};
-    msg.username = socket.name;
-    msg.file = evt.target.result;
-    msg.fileName = data.fileName;
-    
-    socket.emit("base64_file",msg);
-    input_file.value = "";
-   
-    
-  };
-  reader.readAsDataURL(data);
-  
   if (username.readOnly === false) {
     username.readOnly = true;
     username.style.backgroundColor = "gold"
@@ -198,6 +184,7 @@ socket.on("base64_file", (data,time) => {
   var curr_user_img = users.filter((_user_) => _user_.id === data.id);
   if (selfId === data.id) {
     listitem.classList.add('self');
+    input_file.value = "";
   }
   else{
     listitem.style.color = curr_user_img[0].color;
@@ -287,3 +274,15 @@ input.addEventListener("keyup", function (event) {
   }
 });
 
+function readThensend(){
+  const data = document.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
+    reader.onload = function(evt){
+      var msg = {};
+      msg.username = socket.name;
+      msg.file = evt.target.result;
+      msg.fileName = data.fileName;
+      socket.emit("base64_file",msg);
+    };
+    reader.readAsDataURL(data);
+}

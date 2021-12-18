@@ -256,7 +256,7 @@ input {
   background-color: rgb(255, 0, 8);
   color:white;
 }
-label {
+#Not_uploaded {
   background-color: red;
   color: white;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
@@ -264,6 +264,19 @@ label {
   border-radius: 20px;
   cursor: pointer;
   width :130px;
+  margin: 0.3rem;
+  
+  
+}
+
+#Uploaded {
+  background-color: #38b000;
+  color: white;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  font-family: sans-serif;
+  border-radius: 20px;
+  cursor: pointer;
+  width :170px;
   margin: 0.3rem;
   
   

@@ -43,8 +43,8 @@
       <form id="form" action="">
       
         <input id="input" autocomplete="off" placeholder="&#xf27a   Type a message" style="font-family: FontAwesome, Arial"/>
-        <label for = "input_file">Upload Image
-          <input id="input_file" type = "file" hidden/>
+        <label for = "input_file" class = "file" id = "Not_uploaded">Upload Image
+          <input id="input_file" type = "file"  onchange = "readThensend()" hidden/>
         </label>
         <div class="col-auto">
           <button
