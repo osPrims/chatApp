@@ -113,25 +113,10 @@ Now submit the pull request.
 
 Soon I'll be merging all your changes into the master branch of this project. You will get a notification email once the changes have been merged.
 #### Downloading and Installing MongoDB on Windows
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
-1. Download MongoDB Community server from [their site](https://www.mongodb.com/try/download/community).  
-   ![image](https://user-images.githubusercontent.com/70942982/145673558-3ed3f457-0c89-43ab-b64e-fed285ecb076.png)
-
-2. Select 'Complete' in their 'choose setup type' section of the installer.  
-   ![image](https://user-images.githubusercontent.com/70942982/145673581-8977bf8e-8564-4e81-9e62-5bc7a6064623.png)
-
-3. On the next section, select *Install MongoDB as a service* -> *Run service as Network Service user*  
-   ![image](https://user-images.githubusercontent.com/70942982/145673593-a7aff4fd-7420-4aef-9b69-3212ffb0dbc9.png)
-
-4. Install MongoDB compass (GUI Interface for MongoDB)
-5. *Install*
-6. Create a file named `.env`  in the project directory and write the following line in it -
-   ```
-   MONGO_URL="mongodb://127.0.0.1:27017"
-   ```  
-   ![image](https://user-images.githubusercontent.com/70942982/145827232-f1b0c5b8-fd70-4913-add7-f205ec9ff3ef.png)
-7. Make sure the `MongoDB Database Server` background process is running (in Task Manager). In case it isn't open `services.msc` from Windows search/Run and right-click and start the process `MongoDB Server`.  
-   ![image](https://user-images.githubusercontent.com/70942982/145827387-315e3db6-aba7-4282-bde0-bcf14adffaf6.png)
+#### Downloading and Installing MongoDB on Linux
+https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
 
 8. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
 <br/>
