@@ -117,7 +117,21 @@ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 ### Downloading and Installing MongoDB on Linux
 https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
 
-8. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
+### *Run*
+1. Create a file named `.env`  in the project directory and write the following line in it -
+   ```
+   MONGO_URL="mongodb://127.0.0.1:27017"
+   ```  
+   ![image](https://user-images.githubusercontent.com/70942982/145827232-f1b0c5b8-fd70-4913-add7-f205ec9ff3ef.png)
+2. Make sure the `MongoDB Database Server` background process is running (in Task Manager). In case it isn't open `services.msc` from Windows search/Run and right-click and start the process `MongoDB Server`.  
+   ![image](https://user-images.githubusercontent.com/70942982/145827387-315e3db6-aba7-4282-bde0-bcf14adffaf6.png)
+
+3. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
+<br/>
+
+You are required to sign up with an Email ID/Password (can be anything, a valid Email ID is not required so far). Login with the credentials and you'll land at the ChatApp's main page.
+
+4. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
 <br/>
 
 You are required to sign up with an Email ID/Password (can be anything, a valid Email ID is not required so far). Login with the credentials and you'll land at the ChatApp's main page.
