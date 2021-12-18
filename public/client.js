@@ -182,7 +182,7 @@ socket.on("typing", (user) => {
 let addusertolist = (user) => {
   let item = document.createElement("li");
   item.style.color = (selfId) ? user.color : 'blue';
-  item.innerHTML = '<span class="dot"></span>' + user.name;
+  item.innerHTML = '<span class="dot"></span>' + '<div class="uname">'+user.name+'</div>';
   item.id = user.id
   item.onclick = handleOnlineClick.bind(null, user.id)
   online.appendChild(item);
