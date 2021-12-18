@@ -50,7 +50,6 @@ where `this-is-you` is your GitHub username. Here you're copying the contents of
 ## Create a branch
 
 Change to the repository directory on your computer (if you are not already there):
-
 ```
 cd first-contributions
 ```
@@ -112,10 +111,10 @@ Now submit the pull request.
 <img style="float: right;" src="https://firstcontributions.github.io/assets/Readme/submit-pull-request.png" alt="submit pull request" />
 
 Soon I'll be merging all your changes into the master branch of this project. You will get a notification email once the changes have been merged.
-#### Downloading and Installing MongoDB on Windows
+### Downloading and Installing MongoDB on Windows
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
-#### Downloading and Installing MongoDB on Linux
+### Downloading and Installing MongoDB on Linux
 https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
 
 8. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
