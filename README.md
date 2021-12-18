@@ -6,9 +6,41 @@ The [chatApp](https://chatapp-420.herokuapp.com) is hosted using Heroku at - htt
 
 ---
 
+## Screenshots
+![Screenshot from 2021-12-16 18-40-40](https://user-images.githubusercontent.com/33419526/146378487-b89d03d4-b268-4d9c-9869-f38bd46a716b.png)
+![Screenshot from 2021-12-16 18-41-19](https://user-images.githubusercontent.com/33419526/146378578-040761f6-c83d-4916-938c-8973eeca57a9.png)
+![Screenshot from 2021-12-16 18-42-29](https://user-images.githubusercontent.com/33419526/146378648-d92dab0e-dae8-4b0a-aca6-99e36035d2c3.png)
+
+---
+
+### Downloading and Installing MongoDB on Windows
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+
+### Downloading and Installing MongoDB on Linux
+https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
+
+### *Run*
+1. Create a file named `.env`  in the project directory and write the following line in it -
+   ```
+   MONGO_URL="mongodb://127.0.0.1:27017"
+   ```  
+   ![image](https://user-images.githubusercontent.com/70942982/145827232-f1b0c5b8-fd70-4913-add7-f205ec9ff3ef.png)
+2. Make sure the `MongoDB Database Server` background process is running (in Task Manager). In case it isn't open `services.msc` from Windows search/Run and right-click and start the process `MongoDB Server`.  
+   ![image](https://user-images.githubusercontent.com/70942982/145827387-315e3db6-aba7-4282-bde0-bcf14adffaf6.png)
+
+3. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
+<br/>
+
+You are required to sign up with an Email ID/Password (can be anything, a valid Email ID is not required so far). Login with the credentials and you'll land at the ChatApp's main page.
+
+4. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
+<br/>
+
+You are required to sign up with an Email ID/Password (can be anything, a valid Email ID is not required so far). Login with the credentials and you'll land at the ChatApp's main page.
+
 #### For guidelines on how to contribute, check out [CONTRIBUTING.md](https://github.com/osBins/chatApp/blob/main/CONTRIBUTING.md) 
 
-# First Contributions
+# Contributions
 
 This project aims to simplify and guide the way beginners make their first contribution. If you are looking to make your first contribution, follow the steps below.
 
@@ -111,36 +143,6 @@ Now submit the pull request.
 <img style="float: right;" src="https://firstcontributions.github.io/assets/Readme/submit-pull-request.png" alt="submit pull request" />
 
 Soon I'll be merging all your changes into the master branch of this project. You will get a notification email once the changes have been merged.
-### Downloading and Installing MongoDB on Windows
-https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
-
-### Downloading and Installing MongoDB on Linux
-https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
-
-### *Run*
-1. Create a file named `.env`  in the project directory and write the following line in it -
-   ```
-   MONGO_URL="mongodb://127.0.0.1:27017"
-   ```  
-   ![image](https://user-images.githubusercontent.com/70942982/145827232-f1b0c5b8-fd70-4913-add7-f205ec9ff3ef.png)
-2. Make sure the `MongoDB Database Server` background process is running (in Task Manager). In case it isn't open `services.msc` from Windows search/Run and right-click and start the process `MongoDB Server`.  
-   ![image](https://user-images.githubusercontent.com/70942982/145827387-315e3db6-aba7-4282-bde0-bcf14adffaf6.png)
-
-3. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
-<br/>
-
-You are required to sign up with an Email ID/Password (can be anything, a valid Email ID is not required so far). Login with the credentials and you'll land at the ChatApp's main page.
-
-4. Finally, run `node index.js` in your terminal/Git bash. Visit `localhost:8080`to see the chatApp working.
-<br/>
-
-You are required to sign up with an Email ID/Password (can be anything, a valid Email ID is not required so far). Login with the credentials and you'll land at the ChatApp's main page.
-
----
-## Screenshots
-![Screenshot from 2021-12-16 18-40-40](https://user-images.githubusercontent.com/33419526/146378487-b89d03d4-b268-4d9c-9869-f38bd46a716b.png)
-![Screenshot from 2021-12-16 18-41-19](https://user-images.githubusercontent.com/33419526/146378578-040761f6-c83d-4916-938c-8973eeca57a9.png)
-![Screenshot from 2021-12-16 18-42-29](https://user-images.githubusercontent.com/33419526/146378648-d92dab0e-dae8-4b0a-aca6-99e36035d2c3.png)
 
 ---
 Open the folder in your choice of editor to edit to make changes to the project.
