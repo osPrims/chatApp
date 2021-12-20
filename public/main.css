@@ -22,6 +22,23 @@ body {
   top: 4px;
 }
 
+.logout {
+  display: inline-block;
+  position: absolute;
+  left: 78%;
+  text-align: center;
+  text-decoration: none;
+  background-color: rgb(237, 28, 36);
+  top: 42px;
+  color: white;
+  padding: 0.8rem 1.8rem;
+  border-radius: 40px;
+}
+.logout:hover {
+  background-color: rgb(255, 0, 8);
+  color: white;
+}
+
 #header nav {
   right: 3rem;
   top: 36px;
@@ -39,7 +56,6 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
-
 }
 
 #online li:hover {
@@ -87,9 +103,9 @@ body {
   background-color: #f1f1f1;
   width: 13rem;
   border-radius: 10px;
-  overflow-wrap: break-word
+  overflow-wrap: break-word;
 }
-.uname{
+.uname {
   width: 89%;
   overflow-wrap: break-word;
   display: inline-block;
@@ -99,7 +115,6 @@ div.content {
   margin-top: 0.3rem;
   padding: 0;
 }
-
 
 /* ############################################ STYLING MAIN ################################## */
 #main {
@@ -139,7 +154,7 @@ div.content {
   padding: 0;
 }
 
-#messages>li {
+#messages > li {
   padding: 0.5rem 1rem;
   padding-bottom: 0.7rem;
   border-radius: 20px;
@@ -161,8 +176,8 @@ div.content {
   float: left;
   background-color: white;
 }
-.useridentified{
-  float:right;
+.useridentified {
+  float: right;
   background-color: gold;
 }
 .self {
@@ -220,7 +235,7 @@ div.content {
   outline: none;
 }
 
-#form>button {
+#form > button {
   background: #333;
   border: none;
   padding: 0 1rem;
@@ -253,18 +268,7 @@ input {
   font-size: 0.8rem;
   color: #333;
 }
-.logout{
-  text-decoration: none;
-  background-color: rgb(237, 28, 36);
-  color:white;
-  float:right;
-  height:30px;
-  border-radius: 2px;
-}
-.logout:hover{
-  background-color: rgb(255, 0, 8);
-  color:white;
-}
+
 #Not_uploaded {
   background-color: red;
   color: white;
@@ -272,10 +276,8 @@ input {
   font-family: sans-serif;
   border-radius: 20px;
   cursor: pointer;
-  width :130px;
+  width: 130px;
   margin: 0.3rem;
-  
-  
 }
 
 #Uploaded {
@@ -285,8 +287,6 @@ input {
   font-family: sans-serif;
   border-radius: 20px;
   cursor: pointer;
-  width :170px;
+  width: 170px;
   margin: 0.3rem;
-  
-  
 }
