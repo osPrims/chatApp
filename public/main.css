@@ -25,14 +25,14 @@ body {
 .logout {
   display: inline-block;
   position: absolute;
-  left: 78%;
   text-align: center;
   text-decoration: none;
   background-color: rgb(237, 28, 36);
-  top: 42px;
   color: white;
+  right: calc(13rem + 4%);
   padding: 0.8rem 1.8rem;
   border-radius: 40px;
+  margin-top: 42px;
 }
 .logout:hover {
   background-color: rgb(255, 0, 8);
