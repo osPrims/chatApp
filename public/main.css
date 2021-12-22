@@ -61,6 +61,15 @@ body {
   margin-top: 20px;
 }
 
+.search-messages input {
+  display: inline-block;
+  text-align: center;
+  margin-left: 100px;
+  margin-top: 20px;
+  border-radius: 15px;
+  font-size: 18px;
+}
+
 .collapsible {
   background-color: #1a4d5e;
   color: white;
