@@ -85,7 +85,7 @@ body {
   margin-top: 20px;
   border-radius: 15px;
   font-size: 18px;
-  border: 0.1px solid rgb(213 213 213);
+  border: 2px solid rgb(255, 0, 8);
 }
 .search-messages input :focus{
   outline: none;
