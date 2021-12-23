@@ -178,7 +178,7 @@ socket.on("typing", (user) => {
   }, 2000);
 });
 // Recieved from a server when an image file is received
-socket.on("base64_file", (data,time) => {
+socket.on("base64_file", (data, time) => {
 
   var listitem = document.createElement('li');
   var curr_user_img = users.filter((_user_) => _user_.id === data.id);
@@ -186,24 +186,24 @@ socket.on("base64_file", (data,time) => {
     listitem.classList.add('self');
     input_file.value = "";
   }
-  else{
+  else {
     listitem.style.color = curr_user_img[0].color;
   }
-  listitem.innerHTML = `<b>${data.username}&nbsp;</b><span class="time">${time} </span><br><img  src="${data.file}" height="200" width="200"/>` 
+  listitem.innerHTML = `<b>${data.username}&nbsp;</b><span class="time">${time} </span><br><img  src="${data.file}" height="200" width="200"/>`
   listitem.classList.add('messages')
   list.appendChild(listitem);
   if (data.id !== selfId) playSound('/notification.mp3')
   feedback.innerHTML = "";
-  
+
   scrollSmoothToBottom('main')
-  
+
 });
 
 // Add user to collapsible
 let addusertolist = (user) => {
   let item = document.createElement("li");
   item.style.color = (selfId) ? user.color : 'blue';
-  item.innerHTML = '<span class="dot"></span>' + '<div class="uname">'+user.name+'</div>';
+  item.innerHTML = '<span class="dot"></span>' + '<div class="uname">' + user.name + '</div>';
   item.id = user.id
   item.onclick = handleOnlineClick.bind(null, user.id)
   online.appendChild(item);
@@ -274,15 +274,15 @@ input.addEventListener("keyup", function (event) {
   }
 });
 
-function readThensend(){
+function readThensend() {
   const data = document.querySelector('input[type=file]').files[0];
-    const reader = new FileReader();
-    reader.onload = function(evt){
-      var msg = {};
-      msg.username = socket.name;
-      msg.file = evt.target.result;
-      msg.fileName = data.fileName;
-      socket.emit("base64_file",msg);
-    };
-    reader.readAsDataURL(data);
+  const reader = new FileReader();
+  reader.onload = function (evt) {
+    var msg = {};
+    msg.username = socket.name;
+    msg.file = evt.target.result;
+    msg.fileName = data.fileName;
+    socket.emit("base64_file", msg);
+  };
+  reader.readAsDataURL(data);
 }
