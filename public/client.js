@@ -95,7 +95,8 @@ fetch("/users")
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (input.value) {
-    socket.emit("chat message", input.value);
+    socket.emit("mychat message", input.value);
+    // console.log("send", input.value);
     input.value = "";
   }
   // if (username.readOnly === false) {
@@ -113,7 +114,7 @@ socket.on("connected", ({ id, name }) => {
 
   if (selfId) {
     let item = document.createElement("li");
-    item.className = 'connection'
+    item.className = 'connection p-2 rounded'
     item.style.color = "black";
     item.textContent = ` ${name} has connected`;
     item.style.backgroundColor = "LightGray";
@@ -136,7 +137,7 @@ socket.on("disconnected", (id) => {
 
   let item = document.createElement("li");
   item.style.color = "black";
-  item.className = 'connection'
+  item.className = 'connection p-2'
   item.style.backgroundColor = "LightGray";
   item.textContent = current_user[0].name + ' has disconnected'
   messages.appendChild(item);
@@ -154,12 +155,12 @@ socket.on("chat message", (user, msg, time, toUser) => {
 
   let current_user = users.filter((_user_) => _user_.id === user.id)
   if (selfId === user.id) {
-    item.innerHTML = `<div class="message other-message ls-msg float-right p-3">${msg}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${user.name}, ${time} </span>`;
+    item.innerHTML = `<div class="message other-message ls-msg float-right p-3"> <span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${time} </span>`;
     // item.classList.add('self')
   }
   else {
     // item.style.color = current_user[0].color
-    item.innerHTML = `<div class="message my-message ls-msg p-3">${msg}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${user.name}, ${time} </span>`;
+    item.innerHTML = `<div class="message my-message ls-msg p-3"><span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${time} </span>`;
   }
   
 
@@ -193,11 +194,11 @@ socket.on("output", ({ result, useremail }) => {
 
       if (result[x].email == useremail) {
         // item.classList.add("useridentified");
-        item.innerHTML = `<div class="message other-message ls-msg float-right p-3">${result[x].message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${result[x].name}, ${result[x].time} </span>`;
+        item.innerHTML = `<div class="message other-message ls-msg float-right p-3"><span class="pb-2 fw-bold">${result[x].name}</span><br>${result[x].message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${result[x].time} </span>`;
       }
       else {
         // item.classList.add('messages');
-        item.innerHTML = `<div class="message my-message ls-msg p-3">${result[x].message}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${result[x].name}, ${result[x].time} </span>`;
+        item.innerHTML = `<div class="message my-message ls-msg p-3"><span class="pb-2 fw-bold">${result[x].name}</span><br>${result[x].message}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${result[x].time} </span>`;
       }
       messages.appendChild(item);
     }
@@ -216,7 +217,7 @@ function scroll(id) {
 
 // Sent to server when you type
 input.addEventListener("keypress", () => {
-  socket.emit("typing", input.value);
+  socket.emit("typing", myId.username);
 });
 
 //Received from server when someone else is typing
@@ -242,7 +243,7 @@ socket.on("base64_file", (data, time) => {
   }
   listitem.innerHTML = `<b>${data.username}&nbsp;</b><span class="time">${time} </span><br><img  src="${data.file}" height="200" width="200"/>`
   listitem.classList.add('messages')
-  list.appendChild(listitem);
+  messages.appendChild(listitem);
   if (data.id !== selfId) playSound('/notification.mp3')
   feedback.innerHTML = "";
 
