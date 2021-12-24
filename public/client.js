@@ -125,6 +125,15 @@ socket.on("chat message", (user, msg, time, toUser) => {
   if (user.id !== selfId) playSound('/notification.mp3')
   feedback.innerHTML = "";
 
+  //emiting a notification to a particular user if the msg has some person tagged
+  users.forEach((saved_user)=>{
+    if(msg.search("@"+saved_user.name)!==-1){
+      //push notification to that specific user
+      alert(saved_user.name + " you have been tagged!")
+    }
+
+  });
+
   // check if someone has set their name
   users.forEach((saved_user) => {
     if (saved_user.id === user.id) {
