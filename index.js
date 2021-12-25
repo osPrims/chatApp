@@ -85,7 +85,7 @@ const checkuser = (req, res, next) => {
     next();
   }
 };
-/****************************************************************************************** */
+/*******************************************************************************************/
 
 //to serve favicon
 app.use(favicon(__dirname + "/public/img/favicon.ico"));
@@ -103,6 +103,7 @@ app.get("/", requireauth, (req, res) => {
 app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/signup.html");
 });
+
 
 
 
@@ -146,9 +147,14 @@ app.post("/signup", async (req, res) => {
 
 
 //handling login
+
+
+
 app.get("/login", (req, res) => {
   res.sendFile(__dirname + "/login.html");
 });
+
+
 app.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -196,6 +202,56 @@ app.post("/login", async (req, res) => {
   }
 });
 
+
+app.get("/forgotpassword", (req, res) => {
+  
+  res.sendFile(__dirname + "/fpassword.html");
+});
+
+
+app.post("/forgotpassword",async(req,res)=>{
+  try{
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      
+      throw "Invalid Email";
+    }
+    if(user)
+    {
+      if (req.body.password === req.body.conpassword) {
+        if(req.body.password.length>=6)
+        {const salt =await bcrypt.genSalt();
+          let password=await bcrypt.hash(req.body.password,salt);
+          const user = await User.updateOne({ email: req.body.email },{$set:{password:password}});
+          res.status(201).json({ user: user._id });
+        }
+        else{
+          throw "Minimum length should be 6 character"
+        }
+      } 
+      else {
+        throw "Password does not matches";
+      }
+    }
+  }
+  catch (err){
+    let error={email:"",password:""}
+   if(err==="Invalid Email")
+   {
+     error.email="Invalid Email"
+   }
+  else if(err==="Password does not matches")
+   {
+     error.password="Password does not matches"
+   }
+  else if(err==="Minimum length should be 6 character")
+   {
+     error.password="Minimum length should be 6 character"
+   }
+   res.status(400).json({ error });
+  }
+
+})
 // Serve list of users
 app.get("/users", (req, res) => {
   res.send(users);
@@ -204,6 +260,7 @@ app.get("/logout",(req,res)=>{
   res.cookie("login","",{maxAge:1})
   res.redirect("/login");
 })
+
 /***************************************************************************************************** */
 
 // When a connection is received
