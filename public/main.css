@@ -280,6 +280,16 @@ input {
   width: 130px;
   margin: 0.3rem;
 }
+#Not_uploaded1 {
+  background-color: red;
+  color: white;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  font-family: sans-serif;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 130px;
+  margin: 0.3rem;
+}
 
 #Uploaded {
   background-color: #38b000;
