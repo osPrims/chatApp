@@ -11,8 +11,25 @@ body{
   min-height: 175px;
 }
 
+.details-bg{
+  background-color: #1d8ff229 ;
+}
+
 .h-250px{
   height: 250px;
+}
+
+.border-custom{
+  border: 2px solid #1d8ff2;  
+  outline: none;  
+}
+
+.text-custom{
+  color: #1374f2;
+}
+
+.bg-custom{
+  background-color: #1d8ff2 !important;
 }
 
 .mh-75{
@@ -32,6 +49,15 @@ body{
   width: 15px;
   border-radius: 50%;
   display: inline-block;
+}
+
+.btn-custom {
+  filter: drop-shadow(4px 4px 9px rgba(0, 0, 0, 0.25));  
+  border: none;
+  color: white;
+  font-size: 20px;
+  border-radius: 49px;
+  cursor: pointer;
 }
 
 .card {
@@ -202,7 +228,7 @@ body{
 }
 
 .chat .chat-history .other-message:after {
-  border-left-color: #e8f1f3;
+  border-left-color: #1d8ff2;
   /* left: 93% */
   /* right: 20%; */
   bottom: 5px;

@@ -155,7 +155,7 @@ socket.on("chat message", (user, msg, time, toUser) => {
 
   let current_user = users.filter((_user_) => _user_.id === user.id)
   if (selfId === user.id) {
-    item.innerHTML = `<div class="message other-message ls-msg float-right p-3"> <span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${time} </span>`;
+    item.innerHTML = `<div class="message other-message bg-custom text-white ls-msg float-right p-3"> <span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${time} </span>`;
     // item.classList.add('self')
   }
   else {
@@ -194,7 +194,7 @@ socket.on("output", ({ result, useremail }) => {
 
       if (result[x].email == useremail) {
         // item.classList.add("useridentified");
-        item.innerHTML = `<div class="message other-message ls-msg float-right p-3"><span class="pb-2 fw-bold">${result[x].name}</span><br>${result[x].message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${result[x].time} </span>`;
+        item.innerHTML = `<div class="message other-message bg-custom text-white ls-msg float-right p-3"><span class="pb-2 fw-bold">${result[x].name}</span><br>${result[x].message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${result[x].time} </span>`;
       }
       else {
         // item.classList.add('messages');

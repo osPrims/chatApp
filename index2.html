@@ -18,21 +18,21 @@
 <div class="container mh-100 d-flex justify-content-center align-items-center">
 <div class="row clearfix mh-75 w-100">
     <div class="col-lg-12">
-        <div class="card chat-app h-100">
+        <div class="card chat-app h-100 shadow-lg border-0">
             <div id="plist" class="people-list d-flex flex-column justify-content-between h-100">
-                <div class="bg-info rounded mh-175px bg-opacity-10 py-3 px-2 d-flex justify-content-between flex-column">
+                <div class="rounded-3 mh-175px py-3 px-2 d-flex justify-content-between flex-column details-bg shadow-sm border-1">
                     <div>
                         <img src='/chatApplogo.png' height="50" width="50" alt='chatapp-logo'>
-                        <h2> CHAT APP </h2>
-                        <div class="d-flex justify-content-center mt-3 w-100">
-                            <p>user: <b><span id="username_holder"></span>,<span id="email_holder" class="text-primary text-decoration-underline"></span></a></b></p>                            
+                        <h2 class="text-custom"> CHAT APP </h2>
+                        <div class="d-flex justify-content-center mt-4 mb-3 w-100">
+                            <p><b><span id="username_holder"></span>, <span id="email_holder" class="text-primary text-decoration-underline"></span></a></b></p>                            
                         </div>
                     </div>
-                    <form class="input-group border rounded-3 bg-white p-1" id="search-messages" action="">
+                    <form class="input-group rounded-pill border-custom bg-white p-1" id="search-messages" action="">
                         <div class="input-group-prepend">
-                          <button id="button-addon4" type="button" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
+                          <button id="button-addon4" type="button" class="btn rounded-pill rounded-end btn-link text-custom"><i class="fa fa-search"></i></button>
                         </div>
-                        <input type="search" placeholder="Search" aria-describedby="button-addon4" class="form-control bg-none border-0">                        
+                        <input type="search" placeholder="Search" aria-describedby="button-addon4" class="form-control bg-none border-0 rounded-pill rounded-start">                        
                     </form>
                 </div>
                 <div>
@@ -40,7 +40,7 @@
                 <ul id="online" class="list-unstyled chat-list mt-2 mb-0 h-250px overflow-auto">                    
                 </ul>
                 </div>
-                <a href="/logout" class="btn btn-danger logout">LOG OUT</a>
+                <a href="/logout" class="btn-custom text-center d-flex justify-content-center mx-auto px-5 py-2 align-items-center text-decoration-none btn-danger logout">LOG OUT</a>
             </div>
             <div class="chat h-100 d-flex justify-content-between flex-column">   
                 <div class="chat-history" id="main">
@@ -50,21 +50,21 @@
                             <span class="text-muted position-absolute bottom--10 start-0 fs-6">10:12 AM</span>
                         </li>
                         <li class="clearfix position-relative">                            
-                            <div class="message other-message float-right p-3"><span class="pb-2 fw-bold">tu_user</span><br>hi</div>                                    
+                            <div class="message bg-custom text-white other-message float-right p-3"><span class="pb-2 fw-bold">tu_user</span><br>hi</div>                                    
                             <span class="text-muted position-absolute bottom--10 end-0 fs-6">10:12 AM, Today</span>
                         </li>                 
                     </ul>                    
                 </div>
-                <div id="feedback" class="d-flex justify-content-center"></div>
+                <div id="feedback" class="d-flex text-custom justify-content-center"></div>
                 <div class="chat-message clearfix">
                     <form class="input-group border rounded-3 bg-white p-1" id="form" action="">    
                         <input  id="input" placeholder="&#xf27a   Type a message" aria-describedby="button-addon4" class="form-control bg-none border-0">                        
                         <div class="input-group-prepend">
-                            <label for = "input_file" class = "file btn btn-info" id = "Not_uploaded">
+                            <label for = "input_file" class = "file btn btn-info bg-custom border-0" id = "Not_uploaded">
                                 <i class="fa fa-file text-white"></i>
                                 <input id="input_file" type = "file"  onchange = "readThensend()" hidden/>
                             </label>
-                            <button id="button-addon4" type="submit" class="btn btn-link text-info"><i class="fa fa-send"></i></button>
+                            <button id="button-addon4" type="submit" class="btn btn-link text-custom"><i class="fa fa-send"></i></button>
                           </div>
                     </form>
                 </div>
