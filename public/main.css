@@ -1,3 +1,4 @@
+
 /* ################################### STYLING INDEX.HTML ########################################### */
 body {
   margin: 0;
@@ -86,10 +87,10 @@ body {
   border-radius: 15px;
   font-size: 18px;
   border: 2px solid rgb(255, 0, 8);
+  outline: none;
 }
 .search-messages input :focus{
   outline: none;
-  border: 0.1px solid rgb(213 213 213);
 }
 .collapsible {
   background-color: #1a4d5e;
