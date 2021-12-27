@@ -79,8 +79,6 @@ Open the folder in your choice of editor to edit to make changes to the project.
 <br>
 
 ## Join US
-join our Telegram channel --> https://t.me/+9ZHXEOsK75BkZTU1
+Join the telegram channel --> https://t.me/+9ZHXEOsK75BkZTU1
 
-## Open Source Event
 
-<img  src="https://vchrombiediary.files.wordpress.com/2017/12/screenshot-from-2017-12-05-17-02-03-another-copy-e1512483232128.png" href="https://kwoc.kossiitkgp.org/">
