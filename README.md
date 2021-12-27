@@ -73,7 +73,7 @@ Open the folder in your choice of editor to edit to make changes to the project.
 
 ## Contributors
 <br>
-<a href="https://github.com/rajraman786/Video-Downloader/graphs/contributors">
+<a href="https://github.com/osBins/chatApp/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=osBins/chatApp" />
 </a>
 <br>
