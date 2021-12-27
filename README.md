@@ -1,10 +1,22 @@
-# chatApp
+# <img src="https://raw.githubusercontent.com/osBins/chatApp/main/public/img/favicon.ico" width="52"> chatApp
 
 ChatApp is a project that we started to get familiar with Websockets and their implementation with Socket.IO.
 
-The [chatApp](https://chatapp-420.herokuapp.com) is hosted using Heroku at - https://chatapp-420.herokuapp.com
+
+![Issues](https://img.shields.io/github/issues/osBins/chatApp)
+![Pull Requests](https://img.shields.io/github/issues-pr/osBins/chatApp?)
+![Forks](https://img.shields.io/github/forks/osBins/chatApp)
+![Stars](https://img.shields.io/github/stars/osBins/chatApp)
+
+The [chatApp](https://chatapp-420.herokuapp.com) is hosted using Heroku.
 
 ---
+## Tech Stack
+1. HTML
+2. CSS
+3. Javascript
+4. Express.js
+5. Socket.IO
 
 #### For guidelines on how to contribute, check out [CONTRIBUTING.md](https://github.com/osBins/chatApp/blob/main/CONTRIBUTING.md) 
 
@@ -58,3 +70,17 @@ You are required to sign up with an Email ID/Password (can be anything, a valid 
    
 ---
 Open the folder in your choice of editor to edit to make changes to the project.
+
+## Contributors
+<br>
+<a href="https://github.com/rajraman786/Video-Downloader/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=osBins/chatApp" />
+</a>
+<br>
+
+## Join US
+join our Telegram channel --> https://t.me/+9ZHXEOsK75BkZTU1
+
+## Open Source Event
+
+<img  src="https://vchrombiediary.files.wordpress.com/2017/12/screenshot-from-2017-12-05-17-02-03-another-copy-e1512483232128.png" href="https://kwoc.kossiitkgp.org/">
