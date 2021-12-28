@@ -85,6 +85,12 @@ body{
   border-left: 1px solid #eaeaea
 }
 
+.outline-none:focus
+{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .people-list {
   -moz-transition: .5s;
   -o-transition: .5s;
