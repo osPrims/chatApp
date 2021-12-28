@@ -95,6 +95,12 @@ app.get("*", checkuser);
 app.get("/", requireauth, (req, res) => {
   userentered = user1.username;
   useremail = user1.email;
+  res.sendFile(__dirname + "/index2.html");
+});
+
+app.get("/ui", requireauth, (req, res) => {
+  userentered = user1.username;
+  useremail = user1.email;
   res.sendFile(__dirname + "/index.html");
 });
 
@@ -109,7 +115,7 @@ app.get("/signup", (req, res) => {
 //handling sign post request
 app.post("/signup", async (req, res) => {
   try {
-
+    console.log(req.body)
     if (req.body.password === req.body.conpassword) {
 
       const user = new User({
@@ -151,8 +157,7 @@ app.get("/login", (req, res) => {
 });
 app.post("/login", async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
-    console.log(user);
+    const user = await User.findOne({ email: req.body.email });    
     if (!user) {
       console.log("inside error block")
       throw "Invalid Email";
@@ -200,6 +205,16 @@ app.post("/login", async (req, res) => {
 app.get("/users", (req, res) => {
   res.send(users);
 });
+
+app.get("/me", (req, res) => {  
+  res.send(user1);
+});
+
+app.get("/messages", async (req, res) => {
+  const result = await Message.find();  
+  res.send(result);
+});
+
 app.get("/logout",(req,res)=>{
   res.cookie("login","",{maxAge:1})
   res.redirect("/login");
@@ -223,7 +238,7 @@ io.on("connection", (socket) => {
   }
 
   // Receiving a chat message from client
-  socket.on("chat message", (msg) => {
+  socket.on("mychat message", (msg) => {
     console.log("Received a chat message");
     let time = moment().utcOffset("+05:30").format('hh:mm A');
     let current_user = users.filter((user) => user.id === socket.id);
