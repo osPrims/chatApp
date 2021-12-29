@@ -51,7 +51,7 @@ let addusertolist = (user) => {
   let item = document.createElement("li");
   // item.style.color = (selfId) ? user.color : 'blue';
   item.className = "clearfix";
-  item.innerHTML = '<div class="about"><div class="name">'+ user.name+'</div></div>';
+  item.innerHTML = '<div class="about"><div class="name">' + user.name + '</div></div>';
   item.id = user.id
   item.onclick = handleOnlineClick.bind(null, user.id)
   online.appendChild(item);
@@ -79,13 +79,13 @@ fetch("/users")
 //       data.map(msg => {
 //         let item = document.createElement("li");
 //         item.className = "clearfix position-relative"        
-  
+
 //         if (msg.email == myId.email) {
 //           item.innerHTML = `<div class="message other-message float-right p-3">${msg.message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${msg.name}, ${msg.time} </span>`;
 //         }
 //         else {
 //           item.innerHTML = `<div class="message my-message p-3">${msg.message}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${msg.name}, ${msg.time} </span>`;
-  
+
 //         }
 //         messages.appendChild(item);  
 //       })
@@ -149,20 +149,20 @@ socket.on("disconnected", (id) => {
 
 // Recieved from a server when a chat message is received
 socket.on("chat message", (user, msg, time, toUser) => {
-  console.log(user,msg,time,toUser);
+  console.log(user, msg, time, toUser);
   let item = document.createElement("li");
   item.className = user.id + " clearfix position-relative";
 
   let current_user = users.filter((_user_) => _user_.id === user.id)
   if (selfId === user.id) {
-    item.innerHTML = `<div class="message other-message bg-custom text-white ls-msg float-right p-3"> <span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${time} </span>`;
+    item.innerHTML = `<div class="message other-message bg-custom text-white ls-msg float-right p-3 wordwrap"> <span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${time} </span>`;
     // item.classList.add('self')
   }
   else {
     // item.style.color = current_user[0].color
-    item.innerHTML = `<div class="message my-message ls-msg p-3"><span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${time} </span>`;
+    item.innerHTML = `<div class="message my-message ls-msg p-3 wordwrap"><span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${time} </span>`;
   }
-  
+
 
   // if (toUser !== "null") item.innerHTML = `<b>${user.name}&nbsp;</b><b>toUser: ${toUser.name}&nbsp;</b> <span class="time">${time} </span>` + `<div class="userMsg">${md.render(msg)}</div>`;
   // else item.innerHTML = `<b>${user.name}&nbsp;</b> <span class="time">${time} </span>` + `<div class="userMsg">${md.render(msg)}</div>`;
@@ -194,11 +194,11 @@ socket.on("output", ({ result, useremail }) => {
 
       if (result[x].email == useremail) {
         // item.classList.add("useridentified");
-        item.innerHTML = `<div class="message other-message bg-custom text-white ls-msg float-right p-3"><span class="pb-2 fw-bold">${result[x].name}</span><br>${result[x].message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${result[x].time} </span>`;
+        item.innerHTML = `<div class="message other-message bg-custom text-white ls-msg float-right p-3 wordwrap"><span class="pb-2 fw-bold">${result[x].name}</span><br>${result[x].message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${result[x].time} </span>`;
       }
       else {
         // item.classList.add('messages');
-        item.innerHTML = `<div class="message my-message ls-msg p-3"><span class="pb-2 fw-bold">${result[x].name}</span><br>${result[x].message}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${result[x].time} </span>`;
+        item.innerHTML = `<div class="message my-message ls-msg p-3 wordwrap"><span class="pb-2 fw-bold">${result[x].name}</span><br>${result[x].message}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${result[x].time} </span>`;
       }
       messages.appendChild(item);
     }
@@ -281,14 +281,14 @@ function handleOnlineClick(id) {
 // search box JS
 const searchBar = forms['search-messages'].querySelector('input');
 
-document.getElementById("search-messages").addEventListener("submit", function(event){
+document.getElementById("search-messages").addEventListener("submit", function (event) {
   event.preventDefault()
 });
 
 searchBar.addEventListener('keyup', (e) => {
   e.preventDefault()
   const term = e.target.value.toLowerCase();
-  const messageList = list.getElementsByClassName('ls-msg');  
+  const messageList = list.getElementsByClassName('ls-msg');
   Array.from(messageList).forEach((msgList) => {
     const title = msgList.textContent;
     if (title.toLowerCase().indexOf(e.target.value) !== -1) {
