@@ -102,8 +102,9 @@ input[type="email"] {
   border: 2px solid #1374f2;
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
+  transition: 0.4s;
 }
-.signup:hover{
+.signup:hover , .login:hover{
   background-color: #1374f2;
   color: white;
 }
@@ -116,9 +117,9 @@ input[type="email"] {
 .secondary-heading {
   padding-top: 0.4rem;
   font-weight: 500;
-  font-size: 1.6rem;
+  font-size: 2.4rem;
   letter-spacing: 0.04em;
-  color: #475d75;
+  color: #1374f2;
 }
 
 .btn-submit {
@@ -131,6 +132,7 @@ input[type="email"] {
   font-size: 24px;
   border-radius: 49px;
   cursor: pointer;
+  transition: 0.4s;
 }
 .btn-submit:hover{
   color: #1374f2;
