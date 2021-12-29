@@ -103,6 +103,10 @@ input[type="email"] {
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
 }
+.signup:hover{
+  background-color: #1374f2;
+  color: white;
+}
 .heading {
   font-size: 4rem;
   letter-spacing: 0.055em;
@@ -128,7 +132,11 @@ input[type="email"] {
   border-radius: 49px;
   cursor: pointer;
 }
-
+.btn-submit:hover{
+  color: #1374f2;
+  background-color: white;
+  border: 2px solid #1374f2;
+}
 #email-error,
 #password-error {
   color: rgb(220, 53, 69);
