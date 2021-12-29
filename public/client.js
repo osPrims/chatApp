@@ -34,24 +34,12 @@ fetch("/me")
 // Color for the messages 
 let colors = ['#0080FF', '#8000FF', '#FF00FF', '#FF0080', '#FF0000', '#FF8000', '#80FF00', '#00FF00', '#00FF80']
 
-// let coll = document.getElementsByClassName("collapsible");
-
-// coll[0].addEventListener("click", function () {
-//   this.classList.toggle("active");
-//   var content = this.nextElementSibling;
-//   if (content.style.display === "block") {
-//     content.style.display = "none";
-//   } else {
-//     content.style.display = "block";
-//   }
-// })
-
 // Add user to collapsible
 let addusertolist = (user) => {
   let item = document.createElement("li");
   // item.style.color = (selfId) ? user.color : 'blue';
   item.className = "clearfix";
-  item.innerHTML = '<div class="about"><div class="name">'+ user.name+'</div></div>';
+  item.innerHTML = '<div class="about"><div class="name">' + user.name + '</div></div>';
   item.id = user.id
   item.onclick = handleOnlineClick.bind(null, user.id)
   online.appendChild(item);
@@ -71,26 +59,7 @@ fetch("/users")
     users = users.concat(data)
   })
 
-// Fetch messages as soon as you connect
-// fetch("/messages")
-//   .then((user) => user.json())
-//   .then((data) => {
-//     if (data.length>0) {
-//       data.map(msg => {
-//         let item = document.createElement("li");
-//         item.className = "clearfix position-relative"        
-  
-//         if (msg.email == myId.email) {
-//           item.innerHTML = `<div class="message other-message float-right p-3">${msg.message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${msg.name}, ${msg.time} </span>`;
-//         }
-//         else {
-//           item.innerHTML = `<div class="message my-message p-3">${msg.message}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${msg.name}, ${msg.time} </span>`;
-  
-//         }
-//         messages.appendChild(item);  
-//       })
-//     }}
-//   )
+
 // Sent a chat message to server when submit a form
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -149,7 +118,7 @@ socket.on("disconnected", (id) => {
 
 // Recieved from a server when a chat message is received
 socket.on("chat message", (user, msg, time, toUser) => {
-  console.log(user,msg,time,toUser);
+  console.log(user, msg, time, toUser);
   let item = document.createElement("li");
   item.className = user.id + " clearfix position-relative";
 
@@ -162,12 +131,7 @@ socket.on("chat message", (user, msg, time, toUser) => {
     // item.style.color = current_user[0].color
     item.innerHTML = `<div class="message my-message ls-msg p-3"><span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${time} </span>`;
   }
-  
 
-  // if (toUser !== "null") item.innerHTML = `<b>${user.name}&nbsp;</b><b>toUser: ${toUser.name}&nbsp;</b> <span class="time">${time} </span>` + `<div class="userMsg">${md.render(msg)}</div>`;
-  // else item.innerHTML = `<b>${user.name}&nbsp;</b> <span class="time">${time} </span>` + `<div class="userMsg">${md.render(msg)}</div>`;
-  // item.innerHTML = `<b>${ user.name }: </b>` + `<div class="userMsg">${msg}</div>`;
-  // item.classList.add('messages')
   messages.appendChild(item)
 
   scrollSmoothToBottom('main')
@@ -281,14 +245,14 @@ function handleOnlineClick(id) {
 // search box JS
 const searchBar = forms['search-messages'].querySelector('input');
 
-document.getElementById("search-messages").addEventListener("submit", function(event){
+document.getElementById("search-messages").addEventListener("submit", function (event) {
   event.preventDefault()
 });
 
 searchBar.addEventListener('keyup', (e) => {
   e.preventDefault()
   const term = e.target.value.toLowerCase();
-  const messageList = list.getElementsByClassName('ls-msg');  
+  const messageList = list.getElementsByClassName('ls-msg');
   Array.from(messageList).forEach((msgList) => {
     const title = msgList.textContent;
     if (title.toLowerCase().indexOf(e.target.value) !== -1) {
