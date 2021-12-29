@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatApp</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+    integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.2.0/markdown-it.js"
+    integrity="sha512-ivJskyHEWoa1WrFlVDWM7o8I7ZKt2dF97kUVMKHT4CPSWxZ7VHuCydjiED3pjOpN0WuT2XA3pK4HrZYNsZ4OqA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/3cf95b6141.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    
+    <div id='header'>
+      <img src='/chatApplogo.png' alt='chatapp-logo'>
+      <h2> CHAT APP </h2>
+      <a href="/logout" class="logout">Log Out <i class="fas fa-sign-out-alt"></i></a>
+      <nav class="">
+        <button type="button" class="collapsible">Online</button>
+        <div class="content">
+          <ul id="online" class=""></ul>
+        </div>
+      </nav>
+      
+    </div>
+    <div id ='main'>
+      <ul id="messages"></ul>
+      <div id="feedback"></div>
+      <form id="form" action="">
+      
+        <input id="input" autocomplete="off" placeholder="&#xf27a   Type a message" style="font-family: FontAwesome, Arial"/>
+        <label for = "input_file" class = "file" id = "Not_uploaded">Upload Image
+          <input id="input_file" type = "file"  onchange = "readThensend()" hidden/>
+        </label>
+        <div class="col-auto">
+          <button
+            type="submit"
+            class="btn--send">
+            Send <i class="fas fa-chevron-circle-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- search box -->
+    <form id="search-messages" action="">
+      <span class="search-messages"><input type="search" placeholder="Search... "/></span>
+    </form>
+    <!-- search box end -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>

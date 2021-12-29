@@ -95,13 +95,13 @@ app.get("*", checkuser);
 app.get("/", requireauth, (req, res) => {
   userentered = user1.username;
   useremail = user1.email;
-  res.sendFile(__dirname + "/index2.html");
+  res.sendFile(__dirname + "/index.html");
 });
 
 app.get("/ui", requireauth, (req, res) => {
   userentered = user1.username;
   useremail = user1.email;
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/old.index.html");
 });
 
 
