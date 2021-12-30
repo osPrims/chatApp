@@ -2,7 +2,10 @@ body{
   background-color: #f4f7f6;
   margin-top:20px;
   min-height: 100vh;
+  overflow: hidden;
 }
+
+
 .mh-100{
   min-height: 100vh;
 }
