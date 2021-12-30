@@ -44,21 +44,13 @@
             </div>
             <div class="chat h-100 d-flex justify-content-between flex-column">   
                 <div class="chat-history" id="main">
-                    <ul id="messages" class="m-b-0">
-                        <li class="clearfix position-relative">                                                        
-                            <div class="message my-message p-3"> <span class="pb-2 fw-bold">ak_user</span><br> hello </div>
-                            <span class="text-muted position-absolute bottom--10 start-0 fs-6">10:12 AM</span>
-                        </li>
-                        <li class="clearfix position-relative">                            
-                            <div class="message bg-custom text-white other-message float-right p-3"><span class="pb-2 fw-bold">tu_user</span><br>hi</div>                                    
-                            <span class="text-muted position-absolute bottom--10 end-0 fs-6">10:12 AM, Today</span>
-                        </li>                 
+                    <ul id="messages" class="m-b-0">               
                     </ul>                    
                 </div>
                 <div id="feedback" class="d-flex text-custom justify-content-center"></div>
                 <div class="chat-message clearfix">
                     <form class="input-group border rounded-3 bg-white p-1" id="form" action="">    
-                        <input  id="input" placeholder="Type a message" aria-describedby="button-addon4" class="form-control bg-none border-0 outline-none">
+                        <input  id="input" placeholder="Type a message" aria-describedby="button-addon4" class="form-control bg-none border-0 outline-none" autocomplete="off">
                         <div class="input-group-prepend">
                             <label for = "input_file" class = "file btn btn-info bg-custom border-0" id = "Not_uploaded">
                                 <i class="fa fa-file text-white"></i>
