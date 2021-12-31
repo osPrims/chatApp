@@ -99,6 +99,13 @@ app.get("/", requireauth, (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
+app.get("/ui", requireauth, (req, res) => {
+  userentered = user1.username;
+  useremail = user1.email;
+  res.sendFile(__dirname + "/old.index.html");
+});
+
+
 //handling signup
 app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/signup.html");
@@ -107,6 +114,7 @@ app.get("/signup", (req, res) => {
 //handling sign post request
 app.post("/signup", async (req, res) => {
   try {
+    console.log(req.body)
     if (req.body.password === req.body.conpassword) {
       const user = new User({
         username: req.body.username,
@@ -146,7 +154,6 @@ app.get("/login", (req, res) => {
 app.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    console.log(user);
     if (!user) {
       console.log("inside error block");
       throw "Invalid Email";
@@ -284,8 +291,18 @@ app.post("/forgotpassword", async (req, res) => {
 app.get("/users", (req, res) => {
   res.send(users);
 });
+
+app.get("/me", (req, res) => {
+  res.send(user1);
+});
+
+app.get("/messages", async (req, res) => {
+  const result = await Message.find();
+  res.send(result);
+});
+
 app.get("/logout", (req, res) => {
-  res.cookie("login", "", { maxAge: 1 });
+  res.cookie("login", "", { maxAge: 1 })
   res.redirect("/login");
 });
 
@@ -308,9 +325,10 @@ io.on("connection", (socket) => {
   }
 
   // Receiving a chat message from client
-  socket.on("chat message", (msg) => {
+  socket.on("mychat message", (msg) => {
     console.log("Received a chat message");
-    let time = moment().utcOffset("+05:30").format("hh:mm A");
+    let date = moment.utc().format();
+    let time = moment.utc(date).local().format('hh:mm A');
     let current_user = users.filter((user) => user.id === socket.id);
     const mail = current_user[0].email;
     const name = current_user[0].name;
@@ -362,14 +380,16 @@ io.on("connection", (socket) => {
     let current_user = users.filter((user) => user.id === socket.id);
     const name = current_user[0].name;
     socket.name = name;
-    let time = moment().utcOffset("+05:30").format("hh:mm A");
+    let date = moment.utc().format();
+    let time = moment.utc(date).local().format('hh:mm A');
     console.log(`received base64 file from ${socket.name}`);
     var data = {};
     data.fileName = msg.fileName;
     data.file = msg.file;
-    data.id = socket.id;
-    data.username = socket.name == "" ? "Anonymous" : socket.name;
+    data.id = socket.id
+    data.username = (socket.name == '' ? "Anonymous" : socket.name);
     io.sockets.emit("base64_file", data, time);
+
   });
   // Sent to all clients when a socket is disconnected
   socket.on("disconnect", () => {
