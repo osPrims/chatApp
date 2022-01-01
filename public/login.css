@@ -144,3 +144,12 @@ input[type="email"] {
   color: rgb(220, 53, 69);
   font-size: 14px;
 }
+.forgetpassword{
+  margin-top:10px;
+  font-size: 18px;
+ 
+}
+.fpassword{
+  text-decoration: none;
+  color:black;
+}

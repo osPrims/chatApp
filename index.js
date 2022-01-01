@@ -17,7 +17,7 @@ const User = require("./database/signupschema");
 
 const moment = require("moment");
 const { timeEnd } = require("console");
-
+const nodemailer = require("nodemailer");
 // Load external styles and scripts from folder 'public'
 app.use(express.static("public"));
 app.use(express.json());
@@ -29,13 +29,19 @@ let err1 = { email: "", password: "" };
 let userentered;
 let useremail;
 let user1;
+
 /****************************************************************************************/
 const getmessages = async (socket) => {
   const result = await Message.find().sort({ _id: 1 });
   socket.emit("output", { result: result, useremail: useremail });
 };
 const storemessage = async (user_name, msg, mail, time) => {
-  const message = new Message({ name: user_name, message: msg, email: mail, time: time });
+  const message = new Message({
+    name: user_name,
+    message: msg,
+    email: mail,
+    time: time,
+  });
   await message.save();
 };
 
@@ -56,36 +62,31 @@ const handlerror = (err) => {
 const maxAge = 3 * 24 * 60 * 60;
 const createtoken = (id) => {
   return jwt.sign({ id }, "ankitgarg", {
-    expiresIn: maxAge
+    expiresIn: maxAge,
   });
 };
-
 
 const checkuser = (req, res, next) => {
   const token = req.cookies.login;
   if (token) {
     jwt.verify(token, "ankitgarg", async (err, decodedToken) => {
       if (err) {
-
         user1 = null;
         next();
-      }
-      else {
+      } else {
         console.log(decodedToken);
         let user = await User.findById(decodedToken.id);
         console.log(user);
         user1 = user;
         next();
       }
-    }
-    )
-  }
-  else {
+    });
+  } else {
     user1 = null;
     next();
   }
 };
-/****************************************************************************************** */
+/*******************************************************************************************/
 
 //to serve favicon
 app.use(favicon(__dirname + "/public/img/favicon.ico"));
@@ -110,14 +111,11 @@ app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/signup.html");
 });
 
-
-
 //handling sign post request
 app.post("/signup", async (req, res) => {
   try {
     console.log(req.body)
     if (req.body.password === req.body.conpassword) {
-
       const user = new User({
         username: req.body.username,
         email: req.body.email,
@@ -126,18 +124,15 @@ app.post("/signup", async (req, res) => {
       await user.save();
 
       res.status(201).json({ user: user._id });
-
     } else {
       throw "Password does not matches";
     }
   } catch (err) {
-
     if (err != "Password does not matches") {
       err1 = handlerror(err);
     }
     if (err == "Password does not matches" && err1.password == "") {
       if (err1.email != "email already exist") {
-
         err1.password = "Password does not matches";
       }
     }
@@ -150,57 +145,148 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-
 //handling login
+
 app.get("/login", (req, res) => {
   res.sendFile(__dirname + "/login.html");
 });
+
 app.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      console.log("inside error block")
+      console.log("inside error block");
       throw "Invalid Email";
     }
 
-
     if (user) {
-
-      const auth = await bcrypt.compare(req.body.password, user.password)
+      const auth = await bcrypt.compare(req.body.password, user.password);
 
       if (auth) {
         const token = createtoken(user._id);
         res.cookie("login", token, { httpOnly: true, maxAge: maxAge * 1000 });
 
         res.status(200).json({ user: user._id });
-      }
-      else {
-
+      } else {
         throw Error("Incorrent password");
       }
     }
-  }
-  catch (err) {
-
+  } catch (err) {
     if (err == "Invalid Email") {
       err1.email = "Email not registered";
-
+    } else {
+      err1.password = "Incorrect password";
     }
-    else {
-
-      err1.password = "Incorrect password"
-    }
-
-
 
     let error = { ...err1 };
-    err1.password = ""
-    err1.email = ""
+    err1.password = "";
+    err1.email = "";
     console.log(error);
     res.status(400).json({ error });
   }
 });
 
+app.post("/otp", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      throw "Invalid Email";
+      
+    }
+     else {
+      
+      var email;
+
+      let transporter = nodemailer.createTransport({
+        
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        service : 'Gmail',
+
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD
+        },
+      });
+       let otp = Math.random();
+      otp = otp * 1000000;
+      otp = parseInt(otp);
+      console.log(otp);
+      
+
+        // send mail with defined transport object
+        var mailOptions = {
+          from:process.env.EMAIL,
+          to: req.body.email,
+          subject: "Otp for registration is: ",
+          text:`otp is:${otp}`
+            
+        }
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return console.log(error);
+          }
+          else{
+            console.log("done");
+          }
+          
+        });
+      
+      res.json({otp})
+    }
+  } catch (err) {
+    let error = { email: "" };
+    if (err === "Invalid Email") {
+      error.email = "Invalid Email";
+    }
+
+    res.status(400).json({ error });
+  }
+});
+app.get("/forgotpassword", (req, res) => {
+  res.sendFile(__dirname + "/fpassword.html");
+});
+
+
+app.post("/forgotpassword", async (req, res) => {
+  try {
+     console.log(req.body.otp,parseInt(req.body.userotp))
+    if (req.body.otp!=parseInt(req.body.userotp)) {
+      
+      throw "Invalid Otp";
+    }
+    else {
+      console.log("noerror")
+      if (req.body.password === req.body.conpassword) {
+        if (req.body.password.length >= 6) {
+          const salt = await bcrypt.genSalt();
+          let password = await bcrypt.hash(req.body.password, salt);
+          const user = await User.updateOne(
+            { email: req.body.email },
+            { $set: { password: password } }
+          );
+          res.status(201).json({ user: user._id });
+        } else {
+          throw "Minimum length should be 6 character";
+        }
+      } else {
+        throw "Password does not matches";
+      }
+    }
+  } catch (err) {
+    let error = {  password: "",otpmessage:""};
+    if (err === "Invalid Otp") {
+      error.otpmessage = "Invalid Otp";
+    } else if (err === "Password does not matches") {
+      error.password = "Password does not matches";
+    } else if (err === "Minimum length should be 6 character") {
+      error.password = "Minimum length should be 6 character";
+    }
+    res.status(400).json({ error });
+  }
+});
 // Serve list of users
 app.get("/users", (req, res) => {
   res.send(users);
@@ -218,7 +304,8 @@ app.get("/messages", async (req, res) => {
 app.get("/logout", (req, res) => {
   res.cookie("login", "", { maxAge: 1 })
   res.redirect("/login");
-})
+});
+
 /***************************************************************************************************** */
 
 // When a connection is received
@@ -233,7 +320,7 @@ io.on("connection", (socket) => {
     users.push({
       name: userentered,
       id: socket.id,
-      email: useremail
+      email: useremail,
     });
   }
 
@@ -243,14 +330,14 @@ io.on("connection", (socket) => {
     let date = moment.utc().format();
     let time = moment.utc(date).local().format('hh:mm A');
     let current_user = users.filter((user) => user.id === socket.id);
-    const mail = current_user[0].email
-    const name = current_user[0].name
+    const mail = current_user[0].email;
+    const name = current_user[0].name;
     socket.name = name;
 
     let userList = [];
     if (msg.substr(0, 3) == "/w ") {
       msg = msg.substr(3);
-      const idx = msg.indexOf(' ');
+      const idx = msg.indexOf(" ");
 
       if (idx != -1) {
         const toUsername = msg.substr(0, idx);
@@ -259,13 +346,29 @@ io.on("connection", (socket) => {
       }
     }
 
-    if (userList.length) userList.forEach(user => io.to(socket.id).to(user.id).emit("chat message", { name: socket.name, id: socket.id }, msg, time, user));
-    else io.emit("chat message", { name: socket.name, id: socket.id }, msg, time, "null");
+    if (userList.length)
+      userList.forEach((user) =>
+        io
+          .to(socket.id)
+          .to(user.id)
+          .emit(
+            "chat message",
+            { name: socket.name, id: socket.id },
+            msg,
+            time,
+            user
+          )
+      );
+    else
+      io.emit(
+        "chat message",
+        { name: socket.name, id: socket.id },
+        msg,
+        time,
+        "null"
+      );
 
     storemessage(name, msg, mail, time);
-
-
-
   });
 
   // Received when some client is typing
@@ -275,7 +378,7 @@ io.on("connection", (socket) => {
   // Receiving an image file from client
   socket.on("base64_file", function (msg) {
     let current_user = users.filter((user) => user.id === socket.id);
-    const name = current_user[0].name
+    const name = current_user[0].name;
     socket.name = name;
     let date = moment.utc().format();
     let time = moment.utc(date).local().format('hh:mm A');
