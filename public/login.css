@@ -53,7 +53,8 @@ form {
 .name-input,
 .email-input,
 .pass-input,
-.pass-reinput {
+.pass-reinput,
+.otp-input {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
@@ -61,7 +62,8 @@ form {
 
 input[type="text"],
 input[type="password"],
-input[type="email"] {
+input[type="email"],
+input[type="number"] {
   width: 50%;
   height: 45px;
   border: 2px solid #1d8ff2;
@@ -104,7 +106,8 @@ input[type="email"] {
   border-radius: 20px;
   transition: 0.4s;
 }
-.signup:hover , .login:hover{
+.signup:hover,
+.login:hover {
   background-color: #1374f2;
   color: white;
 }
@@ -123,8 +126,8 @@ input[type="email"] {
 }
 
 .btn-submit {
-  width: 179px;
   height: 58px;
+  padding: 0 3rem;
   filter: drop-shadow(4px 4px 9px rgba(0, 0, 0, 0.25));
   background-color: #1374f2;
   border: none;
@@ -134,7 +137,7 @@ input[type="email"] {
   cursor: pointer;
   transition: 0.4s;
 }
-.btn-submit:hover{
+.btn-submit:hover {
   color: #1374f2;
   background-color: white;
   border: 2px solid #1374f2;
@@ -144,12 +147,11 @@ input[type="email"] {
   color: rgb(220, 53, 69);
   font-size: 14px;
 }
-.forgetpassword{
-  margin-top:10px;
+.forgetpassword {
+  margin-top: 10px;
   font-size: 18px;
- 
 }
-.fpassword{
+.fpassword {
   text-decoration: none;
-  color:black;
+  color: black;
 }
