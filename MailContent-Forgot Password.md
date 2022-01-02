@@ -1,4 +1,4 @@
-## SUBJECT:
+## Subject:
 ChatApp OTP to login - Forgot password
 
 ## Content :
