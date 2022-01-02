@@ -233,16 +233,17 @@ socket.on("typing", (user) => {
 socket.on("base64_file", (data, time) => {
 
   var listitem = document.createElement('li');
+  listitem.className = "clearfix position-relative";
   var curr_user_img = users.filter((_user_) => _user_.id === data.id);
   if (selfId === data.id) {
-    listitem.classList.add('self');
+    listitem.innerHTML = `<div class = "message other-message bg-custom text-white ls-msg float-right p-3 wordwrap"><span class = "pb-2 fw-bold"><b>${data.username}&nbsp;</b><br><img  src="${data.file}" height="200" width="200"/></div></span><span class = "text-muted position-absolute bottom--10 end-0 fs-6">${time} </span>`
     input_file.value = "";
   }
   else {
-    listitem.style.color = curr_user_img[0].color;
+    listitem.innerHTML = `<div class = "message my-message ls-msg p-3 wordwrap"><span class = "pb-2 fw-bold"><b>${data.username}&nbsp;</b><br><img  src="${data.file}" height="200" width="200"/></div></span><span class="text-muted position-absolute bottom--10 start-0 fs-6">${time} </span>`
   }
-  listitem.innerHTML = `<b>${data.username}&nbsp;</b><span class="time">${time} </span><br><img  src="${data.file}" height="200" width="200"/>`
-  listitem.classList.add('messages')
+  
+  //listitem.classList.add('messages')
   messages.appendChild(listitem);
   if (data.id !== selfId) playSound('/notification.mp3')
   feedback.innerHTML = "";
@@ -333,4 +334,24 @@ function readThensend() {
     socket.emit("base64_file", msg);
   };
   reader.readAsDataURL(data);
+}
+function sendposition(position){
+  var centerCoordinates = new google.maps.LatLng(37.6, -95.665);
+  var defaultOptions = { center: centerCoordinates, zoom: 4 };
+  var mapLayer = document.createElement("div");
+  
+  var map = new google.maps.Map(mapLayer,defaultOptions);
+  var currentLatitude = position.coords.latitude;
+	var currentLongitude = position.coords.longitude;
+
+	var infoWindowHTML = "Latitude: " + currentLatitude + "<br>Longitude: " + currentLongitude;
+  var infoWindow = new google.maps.InfoWindow({map: map, content: infoWindowHTML});
+  var currentLocation = { lat: currentLatitude, lng: currentLongitude };
+	infoWindow.setPosition(currentLocation);
+  socket.emit("location_Send",infoWindow);
+}
+function send_location(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(sendposition);
+  }
 }
