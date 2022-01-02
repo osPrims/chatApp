@@ -99,11 +99,11 @@ app.get("/", requireauth, (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/ui", requireauth, (req, res) => {
-  userentered = user1.username;
-  useremail = user1.email;
-  res.sendFile(__dirname + "/old.index.html");
-});
+// app.get("/ui", requireauth, (req, res) => {
+//   userentered = user1.username;
+//   useremail = user1.email;
+//   res.sendFile(__dirname + "/old.index.html");
+// });
 
 
 //handling signup
