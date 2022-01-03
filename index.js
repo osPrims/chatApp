@@ -15,7 +15,6 @@ const jwt = require("jsonwebtoken");
 const Message = require("./database/registers");
 const User = require("./database/signupschema");
 
-const moment = require("moment");
 const { timeEnd } = require("console");
 const nodemailer = require("nodemailer");
 // Load external styles and scripts from folder 'public'
