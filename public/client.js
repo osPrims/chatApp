@@ -95,7 +95,7 @@ fetch("/users")
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (input.value) {
-    socket.emit("mychat message", input.value);
+    socket.emit("mychat message", input.value, getTime());
     // console.log("send", input.value);
     input.value = "";
   }
@@ -242,7 +242,7 @@ socket.on("base64_file", (data, time) => {
   else {
     listitem.innerHTML = `<div class = "message my-message ls-msg p-3 wordwrap"><span class = "pb-2 fw-bold"><b>${data.username}&nbsp;</b><br><img  src="${data.file}" height="200" width="200"/></div></span><span class="text-muted position-absolute bottom--10 start-0 fs-6">${time} </span>`
   }
-  
+
   //listitem.classList.add('messages')
   messages.appendChild(listitem);
   if (data.id !== selfId) playSound('/notification.mp3')
@@ -335,23 +335,35 @@ function readThensend() {
   };
   reader.readAsDataURL(data);
 }
-function sendposition(position){
+function sendposition(position) {
   var centerCoordinates = new google.maps.LatLng(37.6, -95.665);
   var defaultOptions = { center: centerCoordinates, zoom: 4 };
   var mapLayer = document.createElement("div");
-  
-  var map = new google.maps.Map(mapLayer,defaultOptions);
-  var currentLatitude = position.coords.latitude;
-	var currentLongitude = position.coords.longitude;
 
-	var infoWindowHTML = "Latitude: " + currentLatitude + "<br>Longitude: " + currentLongitude;
-  var infoWindow = new google.maps.InfoWindow({map: map, content: infoWindowHTML});
+  var map = new google.maps.Map(mapLayer, defaultOptions);
+  var currentLatitude = position.coords.latitude;
+  var currentLongitude = position.coords.longitude;
+
+  var infoWindowHTML = "Latitude: " + currentLatitude + "<br>Longitude: " + currentLongitude;
+  var infoWindow = new google.maps.InfoWindow({ map: map, content: infoWindowHTML });
   var currentLocation = { lat: currentLatitude, lng: currentLongitude };
-	infoWindow.setPosition(currentLocation);
-  socket.emit("location_Send",infoWindow);
+  infoWindow.setPosition(currentLocation);
+  socket.emit("location_Send", infoWindow);
 }
-function send_location(){
-  if(navigator.geolocation){
+function send_location() {
+  if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(sendposition);
   }
+}
+
+function getTime() {
+  let date = new Date();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let meridian = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  let strTime = hours + ':' + minutes + ' ' + meridian;
+  return strTime;
 }
