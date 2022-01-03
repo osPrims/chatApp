@@ -222,6 +222,14 @@ app.post("/otp", async (req, res) => {
 
         }
 
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return console.log(error);
+          }
+          else{
+            console.log("done");
+          }
+
       });
 
       res.json({ otp })
