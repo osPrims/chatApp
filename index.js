@@ -168,14 +168,14 @@ app.post("/login", async (req, res) => {
 
         res.status(200).json({ user: user._id });
       } else {
-        throw Error("Incorrent password");
+        throw Error("Incorrect Password");
       }
     }
   } catch (err) {
     if (err == "Invalid Email") {
       err1.email = "Email not registered";
     } else {
-      err1.password = "Incorrect password";
+      err1.password = "Incorrect Password";
     }
 
     let error = { ...err1 };
@@ -191,50 +191,50 @@ app.post("/otp", async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
       throw "Invalid Email";
-      
+
     }
-     else {
-      
+    else {
+
       var email;
 
       let transporter = nodemailer.createTransport({
-        
+
         host: "smtp.gmail.com",
         port: 465,
         secure: true,
-        service : 'Gmail',
+        service: 'Gmail',
 
         auth: {
           user: process.env.EMAIL,
           pass: process.env.PASSWORD
         },
       });
-       let otp = Math.random();
+      let otp = Math.random();
       otp = otp * 1000000;
       otp = parseInt(otp);
       console.log(otp);
-      
 
-        // send mail with defined transport object
-        var mailOptions = {
-          from:process.env.EMAIL,
-          to: req.body.email,
-          subject: "Otp for registration is: ",
-          text:`otp is:${otp}`
-            
+
+      // send mail with defined transport object
+      var mailOptions = {
+        from: process.env.EMAIL,
+        to: req.body.email,
+        subject: "Otp for registration is: ",
+        text: `otp is:${otp}`
+
+      }
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        else {
+          console.log("done");
         }
 
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            return console.log(error);
-          }
-          else{
-            console.log("done");
-          }
-          
-        });
-      
-      res.json({otp})
+      });
+
+      res.json({ otp })
     }
   } catch (err) {
     let error = { email: "" };
@@ -252,9 +252,9 @@ app.get("/forgotpassword", (req, res) => {
 
 app.post("/forgotpassword", async (req, res) => {
   try {
-     console.log(req.body.otp,parseInt(req.body.userotp))
-    if (req.body.otp!=parseInt(req.body.userotp)) {
-      
+    console.log(req.body.otp, parseInt(req.body.userotp))
+    if (req.body.otp != parseInt(req.body.userotp)) {
+
       throw "Invalid Otp";
     }
     else {
@@ -276,7 +276,7 @@ app.post("/forgotpassword", async (req, res) => {
       }
     }
   } catch (err) {
-    let error = {  password: "",otpmessage:""};
+    let error = { password: "", otpmessage: "" };
     if (err === "Invalid Otp") {
       error.otpmessage = "Invalid Otp";
     } else if (err === "Password does not matches") {
@@ -325,10 +325,8 @@ io.on("connection", (socket) => {
   }
 
   // Receiving a chat message from client
-  socket.on("mychat message", (msg) => {
+  socket.on("mychat message", (msg, time) => {
     console.log("Received a chat message");
-    let date = moment.utc().format();
-    let time = moment.utc(date).local().format('hh:mm A');
     let current_user = users.filter((user) => user.id === socket.id);
     const mail = current_user[0].email;
     const name = current_user[0].name;
@@ -380,8 +378,6 @@ io.on("connection", (socket) => {
     let current_user = users.filter((user) => user.id === socket.id);
     const name = current_user[0].name;
     socket.name = name;
-    let date = moment.utc().format();
-    let time = moment.utc(date).local().format('hh:mm A');
     console.log(`received base64 file from ${socket.name}`);
     var data = {};
     data.fileName = msg.fileName;
