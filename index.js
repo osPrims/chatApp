@@ -219,8 +219,10 @@ app.post("/otp", async (req, res) => {
         var mailOptions = {
           from:process.env.EMAIL,
           to: req.body.email,
-          subject: "Otp for registration is: ",
-          text:`otp is:${otp}`
+          subject: "ChatApp OTP to login - Forgot password",
+          text:'Hello user, **Your OTP is : ${otp}** Enter this code within 1 hours to login to your account
+          'if you have forgotten your password or go to the login page to resend it. If you do not recognize'
+          'or expect this mail, please do not share the above OTP with anyone.Regards Team ChatApp`
             
         }
 
