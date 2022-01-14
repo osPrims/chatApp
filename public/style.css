@@ -310,8 +310,21 @@ body {
     overflow-x: auto;
   }
   .chat-app .chat-history {
-    height: 600px;
+    height: calc(100vh - 170px);
+    min-height: 480px;
+    /* height: 600px; */
     overflow-x: auto;
+  }
+  #online {
+    height: 200px;
+  }
+}
+@media (max-height: 611px){
+  body{
+    overflow: auto;
+  }
+  .chat-app {
+    margin-top: 20px;
   }
 }
 
