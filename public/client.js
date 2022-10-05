@@ -17,10 +17,12 @@ let input_file = document.getElementById("input_file");
 let label = document.getElementsByClassName("file");
 
 md = window.markdownit({
-  html: false,
+  html: true,
+  xhtmlOut: true,
   linkify: true,
-  typographer: true
-});
+  typographer: true,
+  breaks: true,
+});;
 
 fetch("/me")
   .then((user) => user.json())
@@ -31,7 +33,7 @@ fetch("/me")
     myId = data
   })
 
-// Color for the messages 
+// Color for the messages
 let colors = ['#0080FF', '#8000FF', '#FF00FF', '#FF0080', '#FF0000', '#FF8000', '#80FF00', '#00FF00', '#00FF80']
 
 // let coll = document.getElementsByClassName("collapsible");
@@ -78,7 +80,7 @@ fetch("/users")
 //     if (data.length>0) {
 //       data.map(msg => {
 //         let item = document.createElement("li");
-//         item.className = "clearfix position-relative"        
+//         item.className = "clearfix position-relative"
 
 //         if (msg.email == myId.email) {
 //           item.innerHTML = `<div class="message other-message float-right p-3">${msg.message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${msg.name}, ${msg.time} </span>`;
@@ -87,7 +89,7 @@ fetch("/users")
 //           item.innerHTML = `<div class="message my-message p-3">${msg.message}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${msg.name}, ${msg.time} </span>`;
 
 //         }
-//         messages.appendChild(item);  
+//         messages.appendChild(item);
 //       })
 //     }}
 //   )
@@ -155,12 +157,12 @@ socket.on("chat message", (user, msg, time, toUser) => {
 
   let current_user = users.filter((_user_) => _user_.id === user.id)
   if (selfId === user.id) {
-    item.innerHTML = `<div class="message other-message bg-custom text-white ls-msg float-right p-3 wordwrap"> <span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${time} </span>`;
+    item.innerHTML = `<div class="message other-message bg-custom text-white ls-msg float-right p-3 wordwrap"> <span class="pb-2 fw-bold">${user.name}</span><br>${md.render(msg)}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${time} </span>`;
     // item.classList.add('self')
   }
   else {
     // item.style.color = current_user[0].color
-    item.innerHTML = `<div class="message my-message ls-msg p-3 wordwrap"><span class="pb-2 fw-bold">${user.name}</span><br>${msg}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${time} </span>`;
+    item.innerHTML = `<div class="message my-message ls-msg p-3 wordwrap"><span class="pb-2 fw-bold">${user.name}</span><br>${md.render(msg)}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${time} </span>`;
   }
 
 
@@ -194,11 +196,11 @@ socket.on("output", ({ result, useremail }) => {
 
       if (result[x].email == useremail) {
         // item.classList.add("useridentified");
-        item.innerHTML = `<div class="message other-message bg-custom text-white ls-msg float-right p-3 wordwrap"><span class="pb-2 fw-bold">${result[x].name}</span><br>${result[x].message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${result[x].time} </span>`;
+        item.innerHTML = `<div class="message other-message bg-custom text-white ls-msg float-right p-3 wordwrap"><span class="pb-2 fw-bold">${result[x].name}</span><br>${md.render(result[x].message)}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${result[x].time} </span>`;
       }
       else {
         // item.classList.add('messages');
-        item.innerHTML = `<div class="message my-message ls-msg p-3 wordwrap"><span class="pb-2 fw-bold">${result[x].name}</span><br>${result[x].message}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${result[x].time} </span>`;
+        item.innerHTML = `<div class="message my-message ls-msg p-3 wordwrap"><span class="pb-2 fw-bold">${result[x].name}</span><br>${md.render(result[x].message)}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${result[x].time} </span>`;
       }
       messages.appendChild(item);
     }
