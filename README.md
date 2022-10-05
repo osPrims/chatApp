@@ -3,10 +3,10 @@
 ChatApp is a project that we started to get familiar with Websockets and their implementation with Socket.IO.
 
 
-![Issues](https://img.shields.io/github/issues/osBins/chatApp)
-![Pull Requests](https://img.shields.io/github/issues-pr/osBins/chatApp?)
-![Forks](https://img.shields.io/github/forks/osBins/chatApp)
-![Stars](https://img.shields.io/github/stars/osBins/chatApp)
+![Issues](https://img.shields.io/github/issues/osBins/chatApp?style=flat-square&logo=appveyor)
+![Pull Requests](https://img.shields.io/github/issues-pr/osBins/chatApp?style=flat-square&logo=appveyor)
+![Forks](https://img.shields.io/github/forks/osBins/chatApp?style=flat-square&logo=appveyor)
+![Stars](https://img.shields.io/github/stars/osBins/chatApp?style=flat-square&logo=appveyor)
 
 The [chatApp](https://chatapp-420.herokuapp.com) is hosted using Heroku.
 
