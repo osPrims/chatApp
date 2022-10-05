@@ -19,8 +19,8 @@ The [chatApp](https://chatapp-420.herokuapp.com) is hosted using Heroku.
 
 #### For guidelines on how to contribute, check out [CONTRIBUTING.md](https://github.com/osBins/chatApp/blob/main/CONTRIBUTING.md) 
 
-## How to set up to contribute to the project
-Check out [SETUP.md](https://github.com/abhis1n/chatApp/blob/main/SETUP.md) for complete installation guide.
+## Setting up the project
+Check out [**SETUP.md**](https://github.com/abhis1n/chatApp/blob/main/SETUP.md) for complete installation guide.
 
 ## Contributors
 <br>
