@@ -125,7 +125,7 @@ socket.on("connected", ({ id, name }) => {
   else {
     selfId = id
     feedback.innerHTML = "Welcome to Chat App - Instant Messaging App"
-    playSound('/welcome.mp3')
+    
   }
 
   scrollSmoothToBottom('main')
@@ -173,7 +173,7 @@ socket.on("chat message", (user, msg, time, toUser) => {
   messages.appendChild(item)
 
   scrollSmoothToBottom('main')
-  if (user.id !== selfId) playSound('/notification.mp3')
+  if (user.id !== selfId) 
   feedback.innerHTML = "";
 
   // check if someone has set their name
@@ -247,7 +247,7 @@ socket.on("base64_file", (data, time) => {
 
   //listitem.classList.add('messages')
   messages.appendChild(listitem);
-  if (data.id !== selfId) playSound('/notification.mp3')
+  if (data.id !== selfId) 
   feedback.innerHTML = "";
 
   scrollSmoothToBottom('main')
@@ -269,11 +269,6 @@ function scrollSmoothToBottom(id) {
     top: scrollHeight + 10,
     behavior: "smooth"
   })
-}
-
-function playSound(url) {
-  const audio = new Audio(url);
-  audio.play();
 }
 
 function handleOnlineClick(id) {
