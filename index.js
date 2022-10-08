@@ -1,5 +1,6 @@
 // Usual Express and Socket.IO stuff
 require("dotenv").config();
+require("./database/conn");
 const bcrypt = require("bcrypt");
 const express = require("express");
 let favicon = require("serve-favicon");
@@ -9,7 +10,6 @@ const cookieParser = require("cookie-parser");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
-require("./database/conn");
 const { requireauth } = require("./middleware/auth");
 const jwt = require("jsonwebtoken");
 const Message = require("./database/registers");
@@ -95,19 +95,19 @@ app.get("*", checkuser);
 app.get("/", requireauth, (req, res) => {
   userentered = user1.username;
   useremail = user1.email;
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/views/index.html");
 });
 
 app.get("/ui", requireauth, (req, res) => {
   userentered = user1.username;
   useremail = user1.email;
-  res.sendFile(__dirname + "/old.index.html");
+  res.sendFile(__dirname + "/tmp/old.index.html");
 });
 
 
 //handling signup
 app.get("/signup", (req, res) => {
-  res.sendFile(__dirname + "/signup.html");
+  res.sendFile(__dirname + "/views/signup.html");
 });
 
 //handling sign post request
@@ -147,7 +147,7 @@ app.post("/signup", async (req, res) => {
 //handling login
 
 app.get("/login", (req, res) => {
-  res.sendFile(__dirname + "/login.html");
+  res.sendFile(__dirname + "/views/login.html");
 });
 
 app.post("/login", async (req, res) => {
@@ -244,7 +244,7 @@ app.post("/otp", async (req, res) => {
   }
 });
 app.get("/forgotpassword", (req, res) => {
-  res.sendFile(__dirname + "/fpassword.html");
+  res.sendFile(__dirname + "/views/fpassword.html");
 });
 
 
