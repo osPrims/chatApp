@@ -14,13 +14,18 @@
   background-image: url(/signUp.png);
   background-position: cover;
   background-repeat: no-repeat;
-  padding: 4rem;
+  padding-top: 4rem;
+  padding-left: 8%;
+  padding-right: 8%;
   display: flex;
+  align-items: flex-start;
   height: 100vh;
 }
 .design img {
   width: 50px;
   height: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .design h1 {
@@ -30,6 +35,8 @@
   font-weight: bold;
   margin-bottom: 1rem;
   letter-spacing: 0.055em;
+  margin-left: auto;
+  margin-right: auto;
 }
 .content {
   width: 70%;
@@ -148,6 +155,7 @@ input[type="number"] {
   font-size: 14px;
 }
 .forgetpassword {
+  padding: 0 0.9rem;
   margin-top: 10px;
   font-size: 18px;
 }
