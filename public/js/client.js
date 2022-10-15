@@ -17,8 +17,8 @@ let input_file = document.getElementById("input_file");
 let label = document.getElementsByClassName("file");
 
 md = window.markdownit({
-  html: true,
-  xhtmlOut: true,
+  html: false,
+  xhtmlOut: false,
   linkify: true,
   typographer: true,
   breaks: true,
