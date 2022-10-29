@@ -11,7 +11,7 @@
 
 .design {
   width: 30%;
-  background-image: url(/signUp.png);
+  background-image: url(../img/signUp.png);
   background-position: cover;
   background-repeat: no-repeat;
   padding: 4rem;
