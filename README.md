@@ -28,8 +28,3 @@ Check out [**SETUP.md**](./SETUP.md)
   <img src="https://contrib.rocks/image?repo=osBins/chatApp" />
 </a>
 <br>
-
-## Join US
-Join the telegram channel --> https://t.me/+9ZHXEOsK75BkZTU1
-
-
