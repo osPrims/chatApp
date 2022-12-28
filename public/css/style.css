@@ -1,6 +1,5 @@
 body {
   background-color: #f4f7f6;
-  margin-top: 20px;
   min-height: 100vh;
   overflow: hidden;
 }
@@ -9,16 +8,8 @@ body {
   min-height: 100vh;
 }
 
-.mh-175px {
-  min-height: 175px;
-}
-
 .details-bg {
   background-color: #1d8ff229;
-}
-
-.h-250px {
-  height: 250px;
 }
 
 .border-custom {
@@ -38,10 +29,6 @@ body {
   min-height: 75vh;
 }
 
-.end-10 {
-  right: 10px;
-}
-
 .bottom--10 {
   bottom: -25px;
 }
@@ -56,7 +43,6 @@ body {
 .btn-custom {
   filter: drop-shadow(4px 4px 9px rgba(0, 0, 0, 0.25));
   border: none;
-  color: white;
   font-size: 20px;
   border-radius: 49px;
   cursor: pointer;
@@ -65,14 +51,11 @@ body {
 .card {
   background: #fff;
   transition: 0.5s;
-  border: 0;
   margin-bottom: 30px;
-  border-radius: 0.55rem;
-  position: relative;
   width: 100%;
   min-width: 80vw;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
 }
+
 .chat-app .people-list {
   width: 280px;
   position: absolute;
@@ -110,7 +93,7 @@ body {
   cursor: pointer;
 }
 
-.people-list .chat-list li.active {
+.people-list .chat-list li .active {
   background: #efefef;
 }
 
@@ -118,40 +101,9 @@ body {
   font-size: 15px;
 }
 
-.people-list .chat-list img {
-  width: 45px;
-  border-radius: 50%;
-}
-
-.people-list img {
-  float: left;
-  border-radius: 50%;
-}
-
-.people-list .about {
+.people-list .about { 
   float: left;
   padding-left: 8px;
-}
-
-.people-list .status {
-  color: #999;
-  font-size: 13px;
-}
-
-.chat .chat-header {
-  padding: 15px 20px;
-  border-bottom: 2px solid #f4f7f6;
-}
-
-.chat .chat-header img {
-  float: left;
-  border-radius: 40px;
-  width: 40px;
-}
-
-.chat .chat-header .chat-about {
-  float: left;
-  padding-left: 10px;
 }
 
 .chat .chat-history {
@@ -173,23 +125,7 @@ body {
   margin-bottom: 0px;
 }
 
-.chat .chat-history .message-data {
-  margin-bottom: 15px;
-}
-
-.chat .chat-history .message-data img {
-  border-radius: 40px;
-  width: 40px;
-}
-
-.chat .chat-history .message-data-time {
-  color: #434651;
-  padding-left: 6px;
-}
-
 .chat .chat-history .message {
-  color: #444;
-  padding: 18px 20px;
   line-height: 26px;
   font-size: 16px;
   border-radius: 7px;
@@ -199,7 +135,6 @@ body {
 
 .chat .chat-history .message:after {
   bottom: 100%;
-  /* left: 7%; */
   border: solid transparent;
   content: " ";
   height: 0;
@@ -236,8 +171,6 @@ body {
 
 .chat .chat-history .other-message:after {
   border-left-color: #1d8ff2;
-  /* left: 93% */
-  /* right: 20%; */
   bottom: 5px;
   right: -20px;
 }
@@ -246,37 +179,19 @@ body {
   padding: 20px;
 }
 
-.online,
-.offline,
-.me {
-  margin-right: 2px;
-  font-size: 8px;
-  vertical-align: middle;
-}
-
-.online {
-  color: #86c541;
-}
-
-.offline {
-  color: #e47297;
-}
-
-.me {
-  color: #1d8ecd;
-}
-
 .float-right {
   float: right;
 }
 
 .clearfix:after {
   visibility: hidden;
-  display: block;
   font-size: 0;
-  content: " ";
-  clear: both;
   height: 0;
+}
+
+.wordwrap{
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 @media only screen and (max-width: 767px) {
@@ -288,15 +203,11 @@ body {
     left: -400px;
     display: none;
   }
-  .chat-app .people-list.open {
-    left: 0;
-  }
+
   .chat-app .chat {
     margin: 0;
   }
-  .chat-app .chat .chat-header {
-    border-radius: 0.55rem 0.55rem 0 0;
-  }
+ 
   .chat-app .chat-history {
     height: 300px;
     overflow-x: auto;
@@ -309,52 +220,45 @@ body {
     min-width: 80vw;
     overflow-x: auto;
   }
+
   .chat-app .chat-history {
     height: calc(100vh - 170px);
     min-height: 480px;
-    /* height: 600px; */
     overflow-x: auto;
   }
+
   #online {
     height: 200px;
   }
 }
+
 @media (max-height: 611px){
   body{
     overflow: auto;
   }
+  
   .chat-app {
     margin-top: 20px;
   }
 }
+
 /* This will work on Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: blue rgb(250, 248, 244);
+  scrollbar-color: #0000ff #faf8f4;
 }
 
-/* Targtes on Chrome, Edge, and Safari */
+/* Targets on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 12px;
 }
 
 *::-webkit-scrollbar-track {
-  background: rgb(239, 238, 235);
+  background: #efeeeb;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: rgb(33, 100, 243);
+  background-color: #2164f3;
   border-radius: 20px;
-  border: 3px solid rgb(33, 100, 243);
-}
-
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
-  /* .chat-app .chat-list {
-      height: 480px;
-      overflow-x: auto
-  }
-  .chat-app .chat-history {
-      /* height: calc(100vh - 350px);
-      overflow-x: auto
-  } */
+  border: 3px solid #2164f3;
 }

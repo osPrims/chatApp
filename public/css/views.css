@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  width: 100vw;
+  display: flex;
+}
+
+.design {
+  width: 30%;
+  background-image: url(../img/signUp.png);
+  background-repeat: no-repeat;
+  padding: 64px;
+  display: flex;
+  height: 100vh;
+}
+
+.design img {
+  width: 50px;
+  height: 50px;
+}
+
+.design h1 {
+  color: #1374f2;
+  font-size: 48px;
+  padding-left: 12px;
+  margin-bottom: 16px;
+  letter-spacing: 2.56px;
+}
+
+.content {
+  width: 70%;
+  height: 100vh;
+  background-color: #fff;
+  position: relative;
+}
+
+.form {
+  height: 500px;
+  padding: 83.2px 64px;
+}
+
+.heading {
+  font-size: 64px;
+  letter-spacing: 2.56px;
+  color: #475d75;
+  font-weight: 500;
+}
+
+.secondary-heading {
+  padding-top: 6.4px;
+  font-weight: 500;
+  font-size: 38.4px;
+  letter-spacing: 1.6px;
+  color: #1374f2;
+}
+
+form {
+  padding-top: 32px
+}
+
+.name-input,
+.email-input,
+.pass-input,
+.pass-reinput,
+.otp-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.96px;
+  color: #475d75;
+  padding-bottom: 6.4px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"] {
+  width: 50%;
+  height: 45px;
+  border: 2px solid #1d8ff2;
+  box-sizing: border-box;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  padding: 16px;
+  outline: none;
+  font-size: 18px;
+}
+
+#email-error,
+#password-error {
+  color: #dc3546;
+  font-size: 14px;
+}
+
+.btn-submit {
+  height: 58px;
+  padding: 4.8px;
+  filter: drop-shadow(4px 4px 9px rgba(0, 0, 0, 0.25));
+  background-color: #1374f2;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  border-radius: 49px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btn-submit:hover {
+  color: #1374f2;
+  background-color: #fff;;
+  border: 2px solid #1374f2;
+}
+
+.forgetpassword {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.fpassword {
+  text-decoration: none;
+  color: #000;
+}
+
+.go-back {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.account,
+.naccount {
+  font-size: 18px;
+  display: inline-block;
+  padding-top: 16px;
+  letter-spacing: 0.6px;
+}
+
+.login,
+.signup {
+  text-decoration: none;
+  display: inline-block;
+  color: #1374f2;
+  border: 2px solid #1374f2;
+  padding: 6.4px 12.8px;
+  border-radius: 20px;
+  transition: 0.4s;
+}
+
+.signup:hover,
+.login:hover {
+  background-color: #1374f2;
+  color: #fff;
+}
