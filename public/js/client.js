@@ -46,22 +46,9 @@ let colors = [
   "#00FF80",
 ];
 
-// let coll = document.getElementsByClassName("collapsible");
-
-// coll[0].addEventListener("click", function () {
-//   this.classList.toggle("active");
-//   var content = this.nextElementSibling;
-//   if (content.style.display === "block") {
-//     content.style.display = "none";
-//   } else {
-//     content.style.display = "block";
-//   }
-// })
-
 // Add user to collapsible
 let addusertolist = (user) => {
   let item = document.createElement("li");
-  // item.style.color = (selfId) ? user.color : 'blue';
   item.className = "clearfix";
   item.innerHTML =
     '<div class="about"><div class="name">' + user.name + "</div></div>";
@@ -84,26 +71,6 @@ fetch("/users")
     users = users.concat(data);
   });
 
-// Fetch messages as soon as you connect
-// fetch("/messages")
-//   .then((user) => user.json())
-//   .then((data) => {
-//     if (data.length>0) {
-//       data.map(msg => {
-//         let item = document.createElement("li");
-//         item.className = "clearfix position-relative"
-
-//         if (msg.email == myId.email) {
-//           item.innerHTML = `<div class="message other-message float-right p-3">${msg.message}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${msg.name}, ${msg.time} </span>`;
-//         }
-//         else {
-//           item.innerHTML = `<div class="message my-message p-3">${msg.message}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${msg.name}, ${msg.time} </span>`;
-
-//         }
-//         messages.appendChild(item);
-//       })
-//     }}
-//   )
 // Sent a chat message to server when submit a form
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -112,10 +79,6 @@ form.addEventListener("submit", (e) => {
     // console.log("send", input.value);
     input.value = "";
   }
-  // if (username.readOnly === false) {
-  //   username.readOnly = true;
-  //   username.style.backgroundColor = "gold"
-  // }
 });
 
 // Received from server when someone gets connected
@@ -180,9 +143,7 @@ socket.on("chat message", (user, msg, time, toUser) => {
     }</span><br>${md.render(
       msg
     )}</div><span class="text-muted position-absolute bottom--10 end-0 fs-6">${time} </span>`;
-    // item.classList.add('self')
   } else {
-    // item.style.color = current_user[0].color
     item.innerHTML = `<div class="message my-message ls-msg p-3 wordwrap"><span class="pb-2 fw-bold">${
       user.name
     }</span><br>${md.render(
@@ -190,10 +151,6 @@ socket.on("chat message", (user, msg, time, toUser) => {
     )}</div><span class="text-muted position-absolute bottom--10 start-0 fs-6">${time} </span>`;
   }
 
-  // if (toUser !== "null") item.innerHTML = `<b>${user.name}&nbsp;</b><b>toUser: ${toUser.name}&nbsp;</b> <span class="time">${time} </span>` + `<div class="userMsg">${md.render(msg)}</div>`;
-  // else item.innerHTML = `<b>${user.name}&nbsp;</b> <span class="time">${time} </span>` + `<div class="userMsg">${md.render(msg)}</div>`;
-  // item.innerHTML = `<b>${ user.name }: </b>` + `<div class="userMsg">${msg}</div>`;
-  // item.classList.add('messages')
   messages.appendChild(item);
 
   scrollSmoothToBottom("main");
@@ -214,8 +171,6 @@ socket.on("output", ({ result, useremail }) => {
     for (var x = 0; x < result.length; x++) {
       let item = document.createElement("li");
       item.className = "clearfix position-relative";
-
-      // item.innerHTML = `<b>${result[x].name}&nbsp;</b> <span class="time">${result[x].time} </span>` + `<div class="userMsg">${md.render(result[x].message)}</div>`;
 
       if (result[x].email == useremail) {
         // item.classList.add("useridentified");
@@ -275,7 +230,6 @@ socket.on("base64_file", (data, time) => {
     listitem.innerHTML = `<div class = "message my-message ls-msg p-3 wordwrap"><span class = "pb-2 fw-bold"><b>${data.username}&nbsp;</b><br><img  src="${data.file}" height="200" width="200"/></div></span><span class="text-muted position-absolute bottom--10 start-0 fs-6">${time} </span>`;
   }
 
-  //listitem.classList.add('messages')
   messages.appendChild(listitem);
   if (data.id !== selfId) feedback.innerHTML = "";
 
