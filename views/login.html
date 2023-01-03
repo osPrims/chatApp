@@ -66,14 +66,14 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      const emailerror = document.getElementById("email-error");
-      const passworderror = document.getElementById("password-error");
-
+      const emailError = document.getElementById("email-error");
+      const passwordError = document.getElementById("password-error");
       const form = document.querySelector("form");
+
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        emailerror.innerHTML = "";
-        passworderror.innerHTML = "";
+        emailError.innerHTML = "";
+        passwordError.innerHTML = "";
 
         const email = form.email.value;
         const password = form.password.value;
@@ -88,9 +88,10 @@
             headers: { "Content-Type": "application/json" },
           });
           const data = await res.json();
+
           if (data.error) {
-            emailerror.innerHTML = data.error.email;
-            passworderror.innerHTML = data.error.password;
+            emailError.innerHTML = data.error.email;
+            passwordError.innerHTML = data.error.password;
           }
           if (data.user) {
             location.assign("/");

@@ -82,31 +82,35 @@
       </div>
     </div>
     <script>
-      const emailerror = document.getElementById("email-error");
-      const passworderror = document.getElementById("password-error");
-
+      const emailError = document.getElementById("email-error");
+      const passwordError = document.getElementById("password-error");
       const form = document.querySelector("form");
+
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        emailerror.innerHTML = "";
-        passworderror.innerHTML = "";
+        emailError.innerHTML = "";
+        passwordError.innerHTML = "";
+
         const username = form.username.value;
         const email = form.email.value;
         const password = form.password.value;
         const conpassword = form.conpassword.value;
-        console.log(form.password.value);
-        console.log(form.conpassword.value);
+        
         try {
           const res = await fetch("/signup", {
             method: "POST",
-            body: JSON.stringify({ username: username, email: email, password: password, conpassword: conpassword }),
+            body: JSON.stringify({ 
+              username: username, 
+              email: email, 
+              password: password, 
+              conpassword: conpassword }),
             headers: { "Content-Type": "application/json" },
           });
           const data = await res.json();
 
           if (data.error) {
-            emailerror.innerHTML = data.error.email;
-            passworderror.innerHTML = data.error.password;
+            emailError.innerHTML = data.error.email;
+            passwordError.innerHTML = data.error.password;
           }
           if (data.user) {
             location.assign("/login");
