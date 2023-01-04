@@ -20,10 +20,12 @@ const userSchema = new mongoose.Schema({
     minlength: [6, "Minimum length should be 6 character"],
   },
 });
+
 userSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);
   next();
 })
+
 const User = new mongoose.model("user", userSchema);
 module.exports = User;
